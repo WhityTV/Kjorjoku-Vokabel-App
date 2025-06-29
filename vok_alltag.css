@@ -1,0 +1,226 @@
+html {
+    font-size: 62.5%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: wheat;
+    color: #333;
+}
+
+.title {
+  margin: 0;
+  font-size: 5rem;
+}
+
+body{
+    font-size: 3.5rem;
+}
+
+footer{
+    font-size: 2rem;
+    position:absolute ;
+    bottom: 0;
+    margin-bottom: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Gleichmäßiger Abstand zwischen Icon und Titel */
+    padding: 15px;
+}
+
+.home-icon {
+    top: 30px;
+    position: absolute; /* Icon absolut positionieren */
+    left: 30px; /* Abstand vom linken Rand */
+    color: #4a6fa5;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+}
+
+.home-icon:hover {
+    border: none;
+    transform: translateY(-2px) scale(1.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    align-items: center;
+    justify-content: center
+}
+
+.kyoryoku-icon {
+    top: 30px;
+    position: absolute; /* Icon absolut positionieren */
+    right: 30px; /* Abstand vom rechten Rand */
+    color: #4a6fa5;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+}
+
+.kyoryoku-icon:hover {
+    border: none;
+    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    align-items: center;
+    justify-content: center
+}
+
+/* Karteikarten-Stil */
+.flashcard {
+    display: none;
+    text-align: center;
+    background: white;
+    padding: 40px;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    max-width: 20%;
+    min-height:calc(1.6em*3.5);
+}
+
+.flashcard.active {
+    display: block;
+    transform: translateY(-5px);
+}
+
+/* Text-Elemente */
+.solid {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    display: block;
+    margin: 20px;
+}
+
+.solid2 {
+    padding: 8px 0;
+    display: inline-block;
+    margin: 0 10px;
+    vertical-align: middle;
+}
+
+.japanese-display {
+    display: block; /* Stellt sicher, dass diese Gruppe eine eigene Zeile einnimmt */
+    margin-bottom: 20px; /* Abstand zwischen den japanischen Zeichen und den Buttons */
+    min-height: 1.6em;
+}
+
+.button-group {
+    display: block; /* Stellt sicher, dass die Button-Gruppe eine eigene Zeile einnimmt */
+    margin-top: 10px; /* Abstand nach oben */
+    text-align: center; /* Zentriert die Buttons innerhalb der Gruppe */
+}
+
+/* Buttons - Modernes Design */
+.btn {
+    cursor: pointer;
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin: 5px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    background: #3a5a8a;
+    transform: scale(1.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.kanji_btn, 
+.kana_btn, 
+.romaji_btn {
+    background: #4a6fa5;
+    margin-top: 20px;
+    transform: scale(1.2);
+}
+
+/* Vergessen-Menü */
+#vergessen_optns {
+    cursor: pointer;
+    display: none;
+    padding: 18px;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 40%;
+    display: none;
+    text-align: center;
+}
+
+#alles_vergessen, #bereich_vergessen {
+    font-size: 2.2rem;
+    display: inline-block;
+    margin: 5px;
+    margin-top: 0%;
+    cursor: pointer;
+    background: dodgerblue;
+    min-width: 20%;
+    max-block-size: 150px;
+    padding: 12px;
+    font-weight: bold;
+    border-radius: 20px;
+    border: none;
+    color: white;
+}
+
+#bereich_vergessen:hover, #alles_vergessen:hover {
+    background:dodgerblue;
+}
+
+/* Review-Menüs */
+#reviewMenue, #reviewMenue2 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#vergessen_btn, #vergessen_btn2 {
+    font-size: 2.2rem;
+    cursor: pointer;
+    background: dodgerblue;
+    width: 150px;
+    padding: 14px;
+    font-weight: bold;
+    border-radius: 20px;
+    border: none;
+    color: white;
+} 
+
+#vergessen_btn:hover, #vergessen_btn2:hover {
+    background: dodgerblue;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .flashcard {
+        margin: 15px;
+        padding: 20px;
+        width: 65%;
+    }
+    
+    .solid {
+        font-size: 2.0rem;
+    }
+    
+    .btn {
+        padding: 8px 12px;
+        font-size: 1.4rem;
+    }
+}
