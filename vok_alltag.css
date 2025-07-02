@@ -48,13 +48,15 @@ footer{
 
 .home-icon:hover {
     border: none;
-    transform: translateY(-2px) scale(1.2);
+    transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     align-items: center;
     justify-content: center
 }
 
 .kyoryoku-icon {
+    border: #333;
+    border: 1px;
     top: 30px;
     position: absolute; /* Icon absolut positionieren */
     right: 30px; /* Abstand vom rechten Rand */
@@ -72,10 +74,39 @@ footer{
 .kyoryoku-icon:hover {
     border: none;
     transform: translateY(-2px);
-    transform: translateY(-2px) scale(1.2);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     align-items: center;
-    justify-content: center
+    justify-content: center;
+}
+
+.kyoryoku-menu {
+    font-size: 2rem;
+    position: absolute;
+    top: 85px; /* etwas unter dem Icon */
+    right: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    width: 200px;
+    padding: 10px 0;
+    display: none;
+    z-index: 1000;
+}
+
+.kyoryoku-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.kyoryoku-menu li {
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.kyoryoku-menu li:hover {
+    background: #f0f0f0;
 }
 
 /* Karteikarten-Stil */
