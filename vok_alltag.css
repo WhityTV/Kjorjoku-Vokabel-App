@@ -184,7 +184,7 @@ footer{
 }
 
 /* Vergessen-Menü */
-#vergessen_optns {
+#gewusst_optns, #vergessen_optns {
     cursor: pointer;
     display: none;
     padding: 18px;
@@ -195,7 +195,7 @@ footer{
     text-align: center;
 }
 
-#alles_vergessen, #bereich_vergessen {
+#gewusst_komplett, #gewusst_groesstenteils, #gewusst_teilweise, #alles_vergessen, #bereich_vergessen {
     font-size: 2.2rem;
     display: inline-block;
     margin: 5px;
@@ -211,17 +211,13 @@ footer{
     color: white;
 }
 
-#bereich_vergessen:hover, #alles_vergessen:hover {
-    background:dodgerblue;
-}
-
 /* Review-Menüs */
 #reviewMenue, #reviewMenue2 {
     text-align: center;
     margin: 20px 0;
 }
 
-#vergessen_btn, #vergessen_btn2 {
+#gewusst_btn, #gewusst_btn2, #vergessen_btn, #vergessen_btn2 {
     font-size: 2.2rem;
     cursor: pointer;
     background: dodgerblue;
@@ -233,7 +229,7 @@ footer{
     color: white;
 } 
 
-#vergessen_btn:hover, #vergessen_btn2:hover {
+#gewusst_btn:hover, #gewusst_btn2:hover, #gewusst_komplett:hover, #gewusst_groesstenteils:hover, #gewusst_teilweise:hover, #alles_vergessen:hover, #bereich_vergessen:hover, #vergessen_btn:hover, #vergessen_btn2:hover {
     background: dodgerblue;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
