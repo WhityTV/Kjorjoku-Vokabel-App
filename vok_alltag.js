@@ -85,29 +85,48 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Vergessen-Buttons
+    document.getElementById('gewusst_btn').addEventListener('click', function() {
+        document.getElementById('gewusst_optns').style.display = 'block';
+        document.getElementById('reviewMenue').style.display = "none";
+        document.getElementById('reviewMenue2').style.display = "none";
+    });
+
+    document.getElementById('gewusst_btn2').addEventListener('click', function() {
+        document.getElementById('gewusst_optns').style.display = 'block'; // Korrigiert: richtiger ID Name
+        document.getElementById('reviewMenue').style.display = "none";
+        document.getElementById('reviewMenue2').style.display = "none";
+    });
+
+    // --- "Vergessen" Buttons ---
     document.getElementById('vergessen_btn').addEventListener('click', function() {
         document.getElementById('vergessen_optns').style.display = 'block';
         document.getElementById('reviewMenue').style.display = "none";
         document.getElementById('reviewMenue2').style.display = "none";
-
-        // Alle Kana- und Romaji-Buttons für alle Karten ausblenden
-        const kanaButtons = document.querySelectorAll('.kana_btn');
-        const romajiButtons = document.querySelectorAll('.romaji_btn');
-        kanaButtons.forEach(btn => btn.style.display = 'none');
-        romajiButtons.forEach(btn => btn.style.display = 'none');
     });
 
     document.getElementById('vergessen_btn2').addEventListener('click', function() {
         document.getElementById('vergessen_optns').style.display = 'block';
         document.getElementById('reviewMenue').style.display = "none";
         document.getElementById('reviewMenue2').style.display = "none";
-        
-        // Alle Kana- und Romaji-Buttons für alle Karten ausblenden
-        const kanaButtons = document.querySelectorAll('.kana_btn');
-        const romajiButtons = document.querySelectorAll('.romaji_btn');
-        kanaButtons.forEach(btn => btn.style.display = 'none');
-        romajiButtons.forEach(btn => btn.style.display = 'none');
+    });
+
+    // --- Unter-Optionen für "Gewusst" ---
+    document.getElementById('gewusst_komplett').addEventListener('click', function() {
+        // Logik für "Komplett gewusst" (z.B. nächste Karte laden)
+        nextCardAndReset();
+        document.getElementById('gewusst_optns').style.display = 'none';
+    });
+
+    document.getElementById('gewusst_groesstenteils').addEventListener('click', function() {
+        // Logik für "Größtenteils gewusst" (z.B. Karte später wiederholen)
+        nextCardAndReset();
+        document.getElementById('gewusst_optns').style.display = 'none';
+    });
+
+    document.getElementById('gewusst_teilweise').addEventListener('click', function() {
+        // Logik für "Teilweise gewusst" (z.B. Karte bald wiederholen)
+        nextCardAndReset();
+        document.getElementById('gewusst_optns').style.display = 'none';
     });
 
     // Bereich vergessen Funktion
