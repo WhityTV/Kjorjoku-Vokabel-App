@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   
-    // Event Delegation für Buttons
     container.addEventListener('click', function(e) {
         const target = e.target;
         const card = target.closest('.flashcard');
@@ -81,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- "Gewusst" Buttons ---
     document.getElementById('gewusst_btn').addEventListener('click', function() {
         document.getElementById('gewusst_optns').style.display = 'block';
         document.getElementById('reviewMenue').style.display = "none";
@@ -94,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('reviewMenue2').style.display = "none";
     });
 
-    // --- "Vergessen" Buttons ---
     document.getElementById('vergessen_btn').addEventListener('click', function() {
         document.getElementById('vergessen_optns').style.display = 'block';
         document.getElementById('reviewMenue').style.display = "none";
@@ -107,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('reviewMenue2').style.display = "none";
     });
 
-    // --- Unter-Optionen für "Gewusst" ---
     document.getElementById('gewusst_komplett').addEventListener('click', function() {
         nextCardAndReset();
         document.getElementById('gewusst_optns').style.display = 'none';
@@ -122,14 +118,15 @@ document.addEventListener('DOMContentLoaded', function() {
         nextCardAndReset();
         document.getElementById('gewusst_optns').style.display = 'none';
     });
-
-    // --- Unter-Optionen für "Vergessen" ---
-    document.getElementById('vergessen_alles').addEventListener('click', function() {
+    
+    // --- Korrigierte Logik für "Alles vergessen" ---
+    document.getElementById('alles_vergessen').addEventListener('click', function() {
         nextCardAndReset();
         document.getElementById('vergessen_optns').style.display = 'none';
     });
 
-    document.getElementById('vergessen_bereich').addEventListener('click', function() {
+    // --- Korrigierte Logik für "Bereich vergessen" ---
+    document.getElementById('bereich_vergessen').addEventListener('click', function() {
         const currentCard = container.querySelector('.flashcard.active');
         if (!currentCard) return;
 
@@ -143,20 +140,11 @@ document.addEventListener('DOMContentLoaded', function() {
             currentCard.querySelector('.kana_btn').style.display = "inline";
             document.getElementById('reviewMenue').style.display = "none";
             document.getElementById('reviewMenue2').style.display = "none";
-        } else {
-             // Wenn nur Kanji sichtbar, dann zum Reset-Zustand zurück
-            currentCard.querySelector('.kanji_btn').style.display = "inline";
-            currentCard.querySelector('.kana_btn').style.display = "none";
-            currentCard.querySelector('.romaji_btn').style.display = "none";
-            document.getElementById('reviewMenue').style.display = "none";
-            document.getElementById('reviewMenue2').style.display = "none";
         }
-
         document.getElementById('vergessen_optns').style.display = 'none';
         saveProgress();
     });
 
-    // Hilfsfunktion zum Wechseln zur nächsten Karte und Zurücksetzen
     function nextCardAndReset() {
         const currentCard = container.querySelector('.flashcard.active');
         if (currentCard) {
@@ -184,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
       localStorage.setItem('currentCardProgress', JSON.stringify(currentCardProgress));
     }
 
-    // Reset-Funktion für Karten
+
     function resetCard(card) {
         card.querySelectorAll('.kanji, .kana, .romaji').forEach(el => {
             el.style.display = 'none';
@@ -232,7 +220,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Initialisierung
     createFlashcards();
     applySavedProgress();
 });
