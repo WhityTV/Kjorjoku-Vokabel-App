@@ -157,31 +157,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Alles vergessen Funktion
-    document.getElementById('alles_vergessen').addEventListener('click', function () {
+   document.getElementById('alles_vergessen').addEventListener('click', function () {
     const currentCard = container.querySelector('.flashcard.active');
     if (!currentCard) return;
 
-    // Aktuelle Karte deaktivieren
-    currentCard.classList.remove('active');
-
     // Nächste Karte aktivieren
+    currentCard.classList.remove('active');
     currentCardIndex = (currentCardIndex + 1) % cards.length;
     const nextCard = container.children[currentCardIndex];
     nextCard.classList.add('active');
-
-    // Karte zurücksetzen
     resetCard(nextCard);
 
     // Menüs ausblenden
     document.getElementById('vergessen_optns').style.display = 'none';
-    document.getElementById('reviewMenue2').style.display = 'none';
+    document.getElementById('reviewMenue2').style.display = "none";
 
-    // Fortschritt speichern
-    localStorage.setItem('currentCardIndex', currentCardIndex);
     saveProgress();
 });
-
-
 
 function saveProgress() {
   const card = container.children[currentCardIndex];
