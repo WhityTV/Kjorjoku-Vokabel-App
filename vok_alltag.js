@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentCardIndex = parseInt(localStorage.getItem('currentCardIndex')) || 0;
     let currentCardProgress = JSON.parse(localStorage.getItem('currentCardProgress')) || {};
 
-    // HILFSFUNKTIONEN
+    // HILFSFUNKTIONEN - Diese müssen zuerst definiert werden!
     function nextCardAndReset() {
         const currentCard = container.querySelector('.flashcard.active');
         if (currentCard) {
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
 
-    // EVENT-LISTENER
+    // EVENT-LISTENER - Diese müssen nach den Funktionen definiert werden
     container.addEventListener('click', function(e) {
         const target = e.target;
         const card = target.closest('.flashcard');
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
         saveProgress();
     });
 
-    // INITIALISIERUNG
+    // INITIALISIERUNG - Am Ende des Blocks ausführen
     createFlashcards();
     applySavedProgress();
 });
