@@ -156,6 +156,33 @@ document.addEventListener('DOMContentLoaded', function() {
     saveProgress();
     });
 
+    // Alles vergessen Funktion
+    document.getElementById('alles_vergessen').addEventListener('click', function () {
+    const currentCard = container.querySelector('.flashcard.active');
+    if (!currentCard) return;
+
+    // Aktuelle Karte deaktivieren
+    currentCard.classList.remove('active');
+
+    // Nächste Karte aktivieren
+    currentCardIndex = (currentCardIndex + 1) % cards.length;
+    const nextCard = container.children[currentCardIndex];
+    nextCard.classList.add('active');
+
+    // Karte zurücksetzen
+    resetCard(nextCard);
+
+    // Menüs ausblenden
+    document.getElementById('vergessen_optns').style.display = 'none';
+    document.getElementById('reviewMenue2').style.display = 'none';
+
+    // Fortschritt speichern
+    localStorage.setItem('currentCardIndex', currentCardIndex);
+    saveProgress();
+});
+
+
+
 function saveProgress() {
   const card = container.children[currentCardIndex];
   currentCardProgress[currentCardIndex] = {
