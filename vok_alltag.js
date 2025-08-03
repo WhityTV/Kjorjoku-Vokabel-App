@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Kyoryoku-Menü-Logik
+    // --- KYORYOKU MENU LOGIK ---
     const kyoryokuIcon = document.querySelector('.kyoryoku-icon');
     const kyoryokuMenu = document.getElementById('kyoryokuMenu');
 
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         e.stopPropagation();
     });
 
-    // Flashcard-Logik
+    // --- FLASHCARD LOGIK ---
     const cards = [
       {
         german: "Vogel",
@@ -35,116 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('flashcardContainer');
     let currentCardIndex = parseInt(localStorage.getItem('currentCardIndex')) || 0;
     let currentCardProgress = JSON.parse(localStorage.getItem('currentCardProgress')) || {};
-  
-    function createFlashcards() {
-      const template = document.getElementById('flashcardTemplate');
-      cards.forEach((card, index) => {
-        const clone = template.content.cloneNode(true);
-        const cardDiv = clone.querySelector('.flashcard');
-        if (index === currentCardIndex) cardDiv.classList.add('active');
 
-        cardDiv.querySelector('.card-german').textContent = card.german;
-        cardDiv.querySelector('.kanji').textContent = card.kanji;
-        cardDiv.querySelector('.kana').textContent = card.kana;
-        cardDiv.querySelector('.romaji').textContent = card.romaji;
-
-        container.appendChild(cardDiv);
-      });
-    }
-
-    container.addEventListener('click', function(e) {
-        const target = e.target;
-        const card = target.closest('.flashcard');
-        if (!card) return;
-
-        if (target.classList.contains('kanji_btn')) {
-            card.querySelector('.kanji').style.display = "inline";
-            target.style.display = "none";
-            card.querySelector('.kana_btn').style.display = "inline";
-            document.getElementById('reviewMenue2').style.display = "block";
-            document.getElementById('reviewMenue').style.display = "none";
-            saveProgress();
-        } else if (target.classList.contains('kana_btn')) {
-            card.querySelector('.kana').style.display = "inline";
-            target.style.display = "none";
-            card.querySelector('.romaji_btn').style.display = "inline";
-            document.getElementById('reviewMenue2').style.display = "block";
-            document.getElementById('reviewMenue').style.display = "none";
-            saveProgress();
-        } else if (target.classList.contains('romaji_btn')) {
-            card.querySelector('.romaji').style.display = "inline";
-            target.style.display = "none";
-            document.getElementById('reviewMenue2').style.display = "none";
-            document.getElementById('reviewMenue').style.display = "block";
-            saveProgress();
-        }
-    });
-
-    document.getElementById('gewusst_btn').addEventListener('click', function() {
-        document.getElementById('gewusst_optns').style.display = 'block';
-        document.getElementById('reviewMenue').style.display = "none";
-        document.getElementById('reviewMenue2').style.display = "none";
-    });
-
-    document.getElementById('gewusst_btn2').addEventListener('click', function() {
-        document.getElementById('gewusst_optns').style.display = 'block';
-        document.getElementById('reviewMenue').style.display = "none";
-        document.getElementById('reviewMenue2').style.display = "none";
-    });
-
-    document.getElementById('vergessen_btn').addEventListener('click', function() {
-        document.getElementById('vergessen_optns').style.display = 'block';
-        document.getElementById('reviewMenue').style.display = "none";
-        document.getElementById('reviewMenue2').style.display = "none";
-    });
-
-    document.getElementById('vergessen_btn2').addEventListener('click', function() {
-        document.getElementById('vergessen_optns').style.display = 'block';
-        document.getElementById('reviewMenue').style.display = "none";
-        document.getElementById('reviewMenue2').style.display = "none";
-    });
-
-    document.getElementById('gewusst_komplett').addEventListener('click', function() {
-        nextCardAndReset();
-        document.getElementById('gewusst_optns').style.display = 'none';
-    });
-
-    document.getElementById('gewusst_groesstenteils').addEventListener('click', function() {
-        nextCardAndReset();
-        document.getElementById('gewusst_optns').style.display = 'none';
-    });
-
-    document.getElementById('gewusst_teilweise').addEventListener('click', function() {
-        nextCardAndReset();
-        document.getElementById('gewusst_optns').style.display = 'none';
-    });
-    
-    // Korrigierte Logik für "Alles vergessen"
-    document.getElementById('alles_vergessen').addEventListener('click', function() {
-        nextCardAndReset();
-        document.getElementById('vergessen_optns').style.display = 'none';
-    });
-
-    // Korrigierte Logik für "Bereich vergessen"
-    document.getElementById('bereich_vergessen').addEventListener('click', function() {
-        const currentCard = container.querySelector('.flashcard.active');
-        if (!currentCard) return;
-
-        if (currentCard.querySelector('.romaji').style.display === "inline") {
-            currentCard.querySelector('.romaji').style.display = "none";
-            currentCard.querySelector('.romaji_btn').style.display = "inline";
-            document.getElementById('reviewMenue').style.display = "none";
-            document.getElementById('reviewMenue2').style.display = "block";
-        } else if (currentCard.querySelector('.kana').style.display === "inline") {
-            currentCard.querySelector('.kana').style.display = "none";
-            currentCard.querySelector('.kana_btn').style.display = "inline";
-            document.getElementById('reviewMenue').style.display = "none";
-            document.getElementById('reviewMenue2').style.display = "none";
-        }
-        document.getElementById('vergessen_optns').style.display = 'none';
-        saveProgress();
-    });
-
+    // HILFSFUNKTIONEN
     function nextCardAndReset() {
         const currentCard = container.querySelector('.flashcard.active');
         if (currentCard) {
@@ -217,6 +109,115 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function createFlashcards() {
+      const template = document.getElementById('flashcardTemplate');
+      cards.forEach((card, index) => {
+        const clone = template.content.cloneNode(true);
+        const cardDiv = clone.querySelector('.flashcard');
+        if (index === currentCardIndex) cardDiv.classList.add('active');
+
+        cardDiv.querySelector('.card-german').textContent = card.german;
+        cardDiv.querySelector('.kanji').textContent = card.kanji;
+        cardDiv.querySelector('.kana').textContent = card.kana;
+        cardDiv.querySelector('.romaji').textContent = card.romaji;
+
+        container.appendChild(cardDiv);
+      });
+    }
+
+    // EVENT-LISTENER
+    container.addEventListener('click', function(e) {
+        const target = e.target;
+        const card = target.closest('.flashcard');
+        if (!card) return;
+
+        if (target.classList.contains('kanji_btn')) {
+            card.querySelector('.kanji').style.display = "inline";
+            target.style.display = "none";
+            card.querySelector('.kana_btn').style.display = "inline";
+            document.getElementById('reviewMenue2').style.display = "block";
+            document.getElementById('reviewMenue').style.display = "none";
+            saveProgress();
+        } else if (target.classList.contains('kana_btn')) {
+            card.querySelector('.kana').style.display = "inline";
+            target.style.display = "none";
+            card.querySelector('.romaji_btn').style.display = "inline";
+            document.getElementById('reviewMenue2').style.display = "block";
+            document.getElementById('reviewMenue').style.display = "none";
+            saveProgress();
+        } else if (target.classList.contains('romaji_btn')) {
+            card.querySelector('.romaji').style.display = "inline";
+            target.style.display = "none";
+            document.getElementById('reviewMenue2').style.display = "none";
+            document.getElementById('reviewMenue').style.display = "block";
+            saveProgress();
+        }
+    });
+
+    document.getElementById('gewusst_btn').addEventListener('click', function() {
+        document.getElementById('gewusst_optns').style.display = 'block';
+        document.getElementById('reviewMenue').style.display = "none";
+        document.getElementById('reviewMenue2').style.display = "none";
+    });
+
+    document.getElementById('gewusst_btn2').addEventListener('click', function() {
+        document.getElementById('gewusst_optns').style.display = 'block';
+        document.getElementById('reviewMenue').style.display = "none";
+        document.getElementById('reviewMenue2').style.display = "none";
+    });
+
+    document.getElementById('vergessen_btn').addEventListener('click', function() {
+        document.getElementById('vergessen_optns').style.display = 'block';
+        document.getElementById('reviewMenue').style.display = "none";
+        document.getElementById('reviewMenue2').style.display = "none";
+    });
+
+    document.getElementById('vergessen_btn2').addEventListener('click', function() {
+        document.getElementById('vergessen_optns').style.display = 'block';
+        document.getElementById('reviewMenue').style.display = "none";
+        document.getElementById('reviewMenue2').style.display = "none";
+    });
+
+    document.getElementById('gewusst_komplett').addEventListener('click', function() {
+        nextCardAndReset();
+        document.getElementById('gewusst_optns').style.display = 'none';
+    });
+
+    document.getElementById('gewusst_groesstenteils').addEventListener('click', function() {
+        nextCardAndReset();
+        document.getElementById('gewusst_optns').style.display = 'none';
+    });
+
+    document.getElementById('gewusst_teilweise').addEventListener('click', function() {
+        nextCardAndReset();
+        document.getElementById('gewusst_optns').style.display = 'none';
+    });
+    
+    document.getElementById('alles_vergessen').addEventListener('click', function() {
+        nextCardAndReset();
+        document.getElementById('vergessen_optns').style.display = 'none';
+    });
+
+    document.getElementById('bereich_vergessen').addEventListener('click', function() {
+        const currentCard = container.querySelector('.flashcard.active');
+        if (!currentCard) return;
+
+        if (currentCard.querySelector('.romaji').style.display === "inline") {
+            currentCard.querySelector('.romaji').style.display = "none";
+            currentCard.querySelector('.romaji_btn').style.display = "inline";
+            document.getElementById('reviewMenue').style.display = "none";
+            document.getElementById('reviewMenue2').style.display = "block";
+        } else if (currentCard.querySelector('.kana').style.display === "inline") {
+            currentCard.querySelector('.kana').style.display = "none";
+            currentCard.querySelector('.kana_btn').style.display = "inline";
+            document.getElementById('reviewMenue').style.display = "none";
+            document.getElementById('reviewMenue2').style.display = "none";
+        }
+        document.getElementById('vergessen_optns').style.display = 'none';
+        saveProgress();
+    });
+
+    // INITIALISIERUNG
     createFlashcards();
     applySavedProgress();
 });
