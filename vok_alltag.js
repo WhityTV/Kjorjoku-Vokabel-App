@@ -157,24 +157,43 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Alles vergessen Funktion
-   document.getElementById('alles_vergessen').addEventListener('click', function () {
-    console.log("Alles vergessen wurde geklickt!");
-    const currentCard = container.querySelector('.flashcard.active');
-    if (!currentCard) return;
-
-    // Nächste Karte aktivieren
-    currentCard.classList.remove('active');
-    currentCardIndex = (currentCardIndex + 1) % cards.length;
-    const nextCard = container.children[currentCardIndex];
-    nextCard.classList.add('active');
-    resetCard(nextCard);
-
+   document.getElementById('alles_vergessen').addEventListener('click', function() {
+        const currentCard = container.querySelector('.flashcard.active');
+        if (!currentCard) return;
+        // Überprüfen, wo wir uns befinden, und den entsprechenden Button anzeigen
+        if (currentCard.querySelector('.romaji').style.display === "none") {
+            // Speichern des Index der nächsten Karte
+            localStorage.setItem('currentCardIndex', (currentCardIndex + 1) % cards.length);
+            // Wenn Romaji sichtbar ist, wechseln zur nächsten Karte (oder zurücksetzen)
+            currentCard.classList.remove('active');
+            currentCardIndex = (currentCardIndex + 1) % cards.length;
+            const nextCard = container.children[currentCardIndex];
+            nextCard.classList.add('active');
+            resetCard(nextCard);
+            document.getElementById('reviewMenue2').style.display = "none";
+        } else if (currentCard.querySelector('.kana').style.display === "none") {
+           // Speichern des Index der nächsten Karte
+            localStorage.setItem('currentCardIndex', (currentCardIndex + 1) % cards.length);
+            // Wenn Romaji sichtbar ist, wechseln zur nächsten Karte (oder zurücksetzen)
+            currentCard.classList.remove('active');
+            currentCardIndex = (currentCardIndex + 1) % cards.length;
+            const nextCard = container.children[currentCardIndex];
+            nextCard.classList.add('active');
+            resetCard(nextCard);
+        } else {
+            // Speichern des Index der nächsten Karte
+            localStorage.setItem('currentCardIndex', (currentCardIndex + 1) % cards.length);
+            // Wenn Romaji sichtbar ist, wechseln zur nächsten Karte (oder zurücksetzen)
+            currentCard.classList.remove('active');
+            currentCardIndex = (currentCardIndex + 1) % cards.length;
+            const nextCard = container.children[currentCardIndex];
+            nextCard.classList.add('active');
+            resetCard(nextCard);
+        }
     // Menüs ausblenden
     document.getElementById('vergessen_optns').style.display = 'none';
-    document.getElementById('reviewMenue2').style.display = "none";
-
     saveProgress();
-});
+    });
 
 function saveProgress() {
   const card = container.children[currentCardIndex];
