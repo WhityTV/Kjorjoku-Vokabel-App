@@ -110,20 +110,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function createFlashcards() {
-      const template = document.getElementById('flashcardTemplate');
-      cards.forEach((card, index) => {
-        const clone = template.content.cloneNode(true);
-        const cardDiv = clone.querySelector('.flashcard');
-        if (index === currentCardIndex) cardDiv.classList.add('active');
+  const template = document.getElementById('flashcardTemplate');
+  console.log('Template Element:', template); // Sollte das <template>-Element sein, nicht null
 
-        cardDiv.querySelector('.card-german').textContent = card.german;
-        cardDiv.querySelector('.kanji').textContent = card.kanji;
-        cardDiv.querySelector('.kana').textContent = card.kana;
-        cardDiv.querySelector('.romaji').textContent = card.romaji;
+  cards.forEach((card, index) => {
+    const clone = template.content.cloneNode(true);
+    console.log('Geklonter Inhalt:', clone); // Sollte ein DocumentFragment sein
 
-        container.appendChild(cardDiv);
-      });
-    }
+    const cardDiv = clone.querySelector('.flashcard');
+    console.log('Gefundene Karte (cardDiv):', cardDiv); // Sollte das div.flashcard-Element sein, nicht null
+
+    if (index === currentCardIndex) cardDiv.classList.add('active');
+  });
+}
 
     // EVENT-LISTENER - Diese müssen nach den Funktionen definiert werden
     container.addEventListener('click', function(e) {
