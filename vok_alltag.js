@@ -158,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Alles vergessen Funktion
    document.getElementById('alles_vergessen').addEventListener('click', function () {
+    console.log("Alles vergessen wurde geklickt!");
     const currentCard = container.querySelector('.flashcard.active');
     if (!currentCard) return;
 
