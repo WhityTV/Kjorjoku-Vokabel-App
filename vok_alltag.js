@@ -1,24 +1,22 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const icon = document.querySelector('.kyoryoku-icon');
-  const menu = document.getElementById('kyoryokuMenu');
-
-  icon.addEventListener('click', (e) => {
-    e.stopPropagation(); // Klick nicht weiterreichen
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-  });
-
-  // Klick außerhalb schließt das Menü
-  document.addEventListener('click', () => {
-    menu.style.display = 'none';
-  });
-
-  // Klick im Menü selbst soll es nicht schließen
-  menu.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
-});
-
 document.addEventListener('DOMContentLoaded', function() {
+    // --- KYORYOKU MENU LOGIK ---
+    const kyoryokuIcon = document.querySelector('.kyoryoku-icon');
+    const kyoryokuMenu = document.getElementById('kyoryokuMenu');
+
+    kyoryokuIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        kyoryokuMenu.style.display = kyoryokuMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', () => {
+        kyoryokuMenu.style.display = 'none';
+    });
+
+    kyoryokuMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    // --- FLASHCARD LOGIK ---
     const cards = [
       {
         german: "Vogel",
@@ -32,16 +30,12 @@ document.addEventListener('DOMContentLoaded', function() {
         kana: "かげ",
         romaji: "kage"
       }
-      // Weitere Karten hier einfügen
     ];
   
     const container = document.getElementById('flashcardContainer');
-    // Lese den Index der letzten Karte aus
     let currentCardIndex = parseInt(localStorage.getItem('currentCardIndex')) || 0;
-    // Fortschritt der aktuellen Karte
     let currentCardProgress = JSON.parse(localStorage.getItem('currentCardProgress')) || {};
   
-    // Karteikarten erstellen
     function createFlashcards() {
       const template = document.getElementById('flashcardTemplate');
       cards.forEach((card, index) => {
@@ -62,19 +56,21 @@ document.addEventListener('DOMContentLoaded', function() {
     container.addEventListener('click', function(e) {
         const target = e.target;
         const card = target.closest('.flashcard');
+        if (!card) return;
+
         if (target.classList.contains('kanji_btn')) {
             card.querySelector('.kanji').style.display = "inline";
             target.style.display = "none";
             card.querySelector('.kana_btn').style.display = "inline";
-            // ReviewMenue2 anzeigen
             document.getElementById('reviewMenue2').style.display = "block";
+            document.getElementById('reviewMenue').style.display = "none";
             saveProgress();
         } else if (target.classList.contains('kana_btn')) {
             card.querySelector('.kana').style.display = "inline";
             target.style.display = "none";
             card.querySelector('.romaji_btn').style.display = "inline";
-            // ReviewMenue2 anzeigen
             document.getElementById('reviewMenue2').style.display = "block";
+            document.getElementById('reviewMenue').style.display = "none";
             saveProgress();
         } else if (target.classList.contains('romaji_btn')) {
             card.querySelector('.romaji').style.display = "inline";
@@ -85,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // --- "Gewusst" Buttons ---
     document.getElementById('gewusst_btn').addEventListener('click', function() {
         document.getElementById('gewusst_optns').style.display = 'block';
         document.getElementById('reviewMenue').style.display = "none";
@@ -92,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.getElementById('gewusst_btn2').addEventListener('click', function() {
-        document.getElementById('gewusst_optns').style.display = 'block'; // Korrigiert: richtiger ID Name
+        document.getElementById('gewusst_optns').style.display = 'block';
         document.getElementById('reviewMenue').style.display = "none";
         document.getElementById('reviewMenue2').style.display = "none";
     });
@@ -112,146 +109,130 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Unter-Optionen für "Gewusst" ---
     document.getElementById('gewusst_komplett').addEventListener('click', function() {
-        // Logik für "Komplett gewusst" (z.B. nächste Karte laden)
         nextCardAndReset();
         document.getElementById('gewusst_optns').style.display = 'none';
     });
 
     document.getElementById('gewusst_groesstenteils').addEventListener('click', function() {
-        // Logik für "Größtenteils gewusst" (z.B. Karte später wiederholen)
         nextCardAndReset();
         document.getElementById('gewusst_optns').style.display = 'none';
     });
 
     document.getElementById('gewusst_teilweise').addEventListener('click', function() {
-        // Logik für "Teilweise gewusst" (z.B. Karte bald wiederholen)
         nextCardAndReset();
         document.getElementById('gewusst_optns').style.display = 'none';
     });
 
-    // Bereich vergessen Funktion
-    document.getElementById('bereich_vergessen').addEventListener('click', function() {
+    // --- Unter-Optionen für "Vergessen" ---
+    document.getElementById('vergessen_alles').addEventListener('click', function() {
+        nextCardAndReset();
+        document.getElementById('vergessen_optns').style.display = 'none';
+    });
+
+    document.getElementById('vergessen_bereich').addEventListener('click', function() {
         const currentCard = container.querySelector('.flashcard.active');
         if (!currentCard) return;
-        // Überprüfen, wo wir uns befinden, und den entsprechenden Button anzeigen
+
         if (currentCard.querySelector('.romaji').style.display === "inline") {
-            // Speichern des Index der nächsten Karte
-            localStorage.setItem('currentCardIndex', (currentCardIndex + 1) % cards.length);
-            // Wenn Romaji sichtbar ist, wechseln zur nächsten Karte (oder zurücksetzen)
-            currentCard.classList.remove('active');
-            currentCardIndex = (currentCardIndex + 1) % cards.length;
-            const nextCard = container.children[currentCardIndex];
-            nextCard.classList.add('active');
-            resetCard(nextCard);
-            document.getElementById('reviewMenue2').style.display = "none";
-        } else if (currentCard.querySelector('.kana').style.display === "inline") {
-            // Wenn Kana sichtbar ist, dann den Romaji-Button anzeigen
+            currentCard.querySelector('.romaji').style.display = "none";
             currentCard.querySelector('.romaji_btn').style.display = "inline";
-        } else {
-            // Wenn Kanji sichtbar ist, dann den Kana-Button anzeigen
+            document.getElementById('reviewMenue').style.display = "none";
+            document.getElementById('reviewMenue2').style.display = "block";
+        } else if (currentCard.querySelector('.kana').style.display === "inline") {
+            currentCard.querySelector('.kana').style.display = "none";
             currentCard.querySelector('.kana_btn').style.display = "inline";
-        }
-    // Menüs ausblenden
-    document.getElementById('vergessen_optns').style.display = 'none';
-    saveProgress();
-    });
-
-    // Alles vergessen Funktion
-   document.getElementById('alles_vergessen').addEventListener('click', function() {
-        const currentCard = container.querySelector('.flashcard.active');
-        if (!currentCard) return;
-        // Überprüfen, wo wir uns befinden, und den entsprechenden Button anzeigen
-        if (currentCard.querySelector('.romaji').style.display === "none") {
-            // Speichern des Index der nächsten Karte
-            localStorage.setItem('currentCardIndex', (currentCardIndex + 1) % cards.length);
-            // Wenn Romaji sichtbar ist, wechseln zur nächsten Karte (oder zurücksetzen)
-            currentCard.classList.remove('active');
-            currentCardIndex = (currentCardIndex + 1) % cards.length;
-            const nextCard = container.children[currentCardIndex];
-            nextCard.classList.add('active');
-            resetCard(nextCard);
+            document.getElementById('reviewMenue').style.display = "none";
             document.getElementById('reviewMenue2').style.display = "none";
-        } else if (currentCard.querySelector('.kana').style.display === "none") {
-           // Speichern des Index der nächsten Karte
-            localStorage.setItem('currentCardIndex', (currentCardIndex + 1) % cards.length);
-            // Wenn Romaji sichtbar ist, wechseln zur nächsten Karte (oder zurücksetzen)
-            currentCard.classList.remove('active');
-            currentCardIndex = (currentCardIndex + 1) % cards.length;
-            const nextCard = container.children[currentCardIndex];
-            nextCard.classList.add('active');
-            resetCard(nextCard);
         } else {
-            // Speichern des Index der nächsten Karte
-            localStorage.setItem('currentCardIndex', (currentCardIndex + 1) % cards.length);
-            // Wenn Romaji sichtbar ist, wechseln zur nächsten Karte (oder zurücksetzen)
+             // Wenn nur Kanji sichtbar, dann zum Reset-Zustand zurück
+            currentCard.querySelector('.kanji_btn').style.display = "inline";
+            currentCard.querySelector('.kana_btn').style.display = "none";
+            currentCard.querySelector('.romaji_btn').style.display = "none";
+            document.getElementById('reviewMenue').style.display = "none";
+            document.getElementById('reviewMenue2').style.display = "none";
+        }
+
+        document.getElementById('vergessen_optns').style.display = 'none';
+        saveProgress();
+    });
+
+    // Hilfsfunktion zum Wechseln zur nächsten Karte und Zurücksetzen
+    function nextCardAndReset() {
+        const currentCard = container.querySelector('.flashcard.active');
+        if (currentCard) {
             currentCard.classList.remove('active');
             currentCardIndex = (currentCardIndex + 1) % cards.length;
             const nextCard = container.children[currentCardIndex];
             nextCard.classList.add('active');
             resetCard(nextCard);
+            document.getElementById('reviewMenue').style.display = "none";
+            document.getElementById('reviewMenue2').style.display = "none";
+            saveProgress();
         }
-    // Menüs ausblenden
-    document.getElementById('vergessen_optns').style.display = 'none';
-    saveProgress();
-    });
-
-function saveProgress() {
-  const card = container.children[currentCardIndex];
-  currentCardProgress[currentCardIndex] = {
-    kanji: card.querySelector('.kanji').style.display === "inline",
-    kana: card.querySelector('.kana').style.display === "inline",
-    romaji: card.querySelector('.romaji').style.display === "inline"
-  };
-
-  localStorage.setItem('currentCardIndex', currentCardIndex);
-  localStorage.setItem('currentCardProgress', JSON.stringify(currentCardProgress));
-}
+    }
 
 
-// Reset-Funktion für Karten
-function resetCard(card) {
-    card.querySelectorAll('.kanji, .kana, .romaji').forEach(el => {
-        el.style.display = 'none';
-    });
-    card.querySelectorAll('.btn').forEach(btn => {
-        btn.style.display = 'inline';
-    });
-    // Blende nur den Kanji-Button der aktuellen Karte ein
-    card.querySelector('.kanji_btn').style.display = 'inline';
-    // Verstecke die anderen Buttons
-    card.querySelector('.kana_btn').style.display = 'none';
-    card.querySelector('.romaji_btn').style.display = 'none';
-}
+    function saveProgress() {
+      const card = container.children[currentCardIndex];
+      currentCardProgress[currentCardIndex] = {
+        kanji: card.querySelector('.kanji').style.display === "inline",
+        kana: card.querySelector('.kana').style.display === "inline",
+        romaji: card.querySelector('.romaji').style.display === "inline"
+      };
 
-function applySavedProgress() {
-  const card = container.children[currentCardIndex];
-  const progress = currentCardProgress[currentCardIndex];
+      localStorage.setItem('currentCardIndex', currentCardIndex);
+      localStorage.setItem('currentCardProgress', JSON.stringify(currentCardProgress));
+    }
 
-  if (!card || !progress) return;
+    // Reset-Funktion für Karten
+    function resetCard(card) {
+        card.querySelectorAll('.kanji, .kana, .romaji').forEach(el => {
+            el.style.display = 'none';
+        });
+        card.querySelector('.kanji_btn').style.display = 'inline';
+        card.querySelector('.kana_btn').style.display = 'none';
+        card.querySelector('.romaji_btn').style.display = 'none';
+    }
 
-  // Grundzustand
-  resetCard(card);
+    function applySavedProgress() {
+        const card = container.children[currentCardIndex];
+        const progress = currentCardProgress[currentCardIndex];
 
-  if (progress.kanji) {
-    card.querySelector('.kanji').style.display = "inline";
-    card.querySelector('.kanji_btn').style.display = "none";
-    card.querySelector('.kana_btn').style.display = "inline";
-  }
-  if (progress.kana) {
-    card.querySelector('.kana').style.display = "inline";
-    card.querySelector('.kana_btn').style.display = "none";
-    card.querySelector('.romaji_btn').style.display = "inline";
-  }
-  if (progress.romaji) {
-    card.querySelector('.romaji').style.display = "inline";
-    card.querySelector('.romaji_btn').style.display = "none";
-    document.getElementById('reviewMenue').style.display = "block";
-  } else if (progress.kana) {
-    document.getElementById('reviewMenue2').style.display = "block";
-  }
-}
+        if (!card) return;
+
+        resetCard(card);
+
+        if (!progress) {
+            document.getElementById('reviewMenue').style.display = "none";
+            document.getElementById('reviewMenue2').style.display = "none";
+            return;
+        }
+
+        if (progress.kanji) {
+            card.querySelector('.kanji').style.display = "inline";
+            card.querySelector('.kanji_btn').style.display = "none";
+            card.querySelector('.kana_btn').style.display = "inline";
+        }
+        if (progress.kana) {
+            card.querySelector('.kana').style.display = "inline";
+            card.querySelector('.kana_btn').style.display = "none";
+            card.querySelector('.romaji_btn').style.display = "inline";
+        }
+        if (progress.romaji) {
+            card.querySelector('.romaji').style.display = "inline";
+            card.querySelector('.romaji_btn').style.display = "none";
+            document.getElementById('reviewMenue').style.display = "block";
+            document.getElementById('reviewMenue2').style.display = "none";
+        } else if (progress.kana) {
+            document.getElementById('reviewMenue2').style.display = "block";
+            document.getElementById('reviewMenue').style.display = "none";
+        } else {
+            document.getElementById('reviewMenue').style.display = "none";
+            document.getElementById('reviewMenue2').style.display = "none";
+        }
+    }
 
     // Initialisierung
     createFlashcards();
     applySavedProgress();
-  });
+});
