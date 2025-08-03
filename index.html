@@ -6,18 +6,17 @@
   <link rel="stylesheet" href="vok_alltag.css">
   <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
   <script src="vok_alltag.js" defer></script>
-  
 </head>
 <body>
   <div class="home-icon"><img src="icons/homeDark.png" alt="Home" width="32" height="32"></div>
   <div class="kyoryoku-icon"><img src="icons/favicon.png" alt="Kyoryoku" width="46" height="46"></div>
   <div class="kyoryoku-menu" id="kyoryokuMenu">
-  <ul>
-    <li>Profil</li>
-    <li>Einstellungen</li>
-    <li>Abmelden</li>
-  </ul>
-</div>
+    <ul>
+      <li>Profil</li>
+      <li>Einstellungen</li>
+      <li>Abmelden</li>
+    </ul>
+  </div>
   <div class="header">
     <h1 class="title">Alltags Vokabeln</h1>
   </div>
@@ -34,12 +33,11 @@
     
     <div class="button-group">
       <button class="kanji_btn btn default">➥</button>
-      <button class="kana_btn btn default">➥</button>
-      <button class="romaji_btn btn default">➥</button>
+      <button class="kana_btn btn default" style="display: none;">➥</button>
+      <button class="romaji_btn btn default" style="display: none;">➥</button>
     </div>
   </div>
 </template>
-
 
 <div id="flashcardContainer"></div>
 
@@ -53,13 +51,13 @@
     <button id="vergessen_btn2">Vergessen</button>
 </div>
 
-<div id="gewusst_optns">
+<div id="gewusst_optns" style="display: none;">
   <button id="gewusst_komplett">Komplett</button>
   <button id="gewusst_groesstenteils">Größtenteils</button>
   <button id="gewusst_teilweise">Teilweise</button>
 </div>
 
-<div id="vergessen_optns">
+<div id="vergessen_optns" style="display: none;">
     <button id="alles_vergessen">Alles vergessen</button>
     <button id="bereich_vergessen">Bereich vergessen</button>
 </div>

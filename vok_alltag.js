@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // --- KYORYOKU MENU LOGIK ---
+    // Kyoryoku-Menü-Logik
     const kyoryokuIcon = document.querySelector('.kyoryoku-icon');
     const kyoryokuMenu = document.getElementById('kyoryokuMenu');
 
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         e.stopPropagation();
     });
 
-    // --- FLASHCARD LOGIK ---
+    // Flashcard-Logik
     const cards = [
       {
         german: "Vogel",
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         container.appendChild(cardDiv);
       });
     }
-  
+
     container.addEventListener('click', function(e) {
         const target = e.target;
         const card = target.closest('.flashcard');
@@ -119,13 +119,13 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('gewusst_optns').style.display = 'none';
     });
     
-    // --- Korrigierte Logik für "Alles vergessen" ---
+    // Korrigierte Logik für "Alles vergessen"
     document.getElementById('alles_vergessen').addEventListener('click', function() {
         nextCardAndReset();
         document.getElementById('vergessen_optns').style.display = 'none';
     });
 
-    // --- Korrigierte Logik für "Bereich vergessen" ---
+    // Korrigierte Logik für "Bereich vergessen"
     document.getElementById('bereich_vergessen').addEventListener('click', function() {
         const currentCard = container.querySelector('.flashcard.active');
         if (!currentCard) return;
@@ -159,7 +159,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-
     function saveProgress() {
       const card = container.children[currentCardIndex];
       currentCardProgress[currentCardIndex] = {
@@ -171,7 +170,6 @@ document.addEventListener('DOMContentLoaded', function() {
       localStorage.setItem('currentCardIndex', currentCardIndex);
       localStorage.setItem('currentCardProgress', JSON.stringify(currentCardProgress));
     }
-
 
     function resetCard(card) {
         card.querySelectorAll('.kanji, .kana, .romaji').forEach(el => {
@@ -187,7 +185,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const progress = currentCardProgress[currentCardIndex];
 
         if (!card) return;
-
         resetCard(card);
 
         if (!progress) {

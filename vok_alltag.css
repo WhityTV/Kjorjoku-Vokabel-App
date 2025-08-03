@@ -27,14 +27,14 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px; /* Gleichmäßiger Abstand zwischen Icon und Titel */
+    gap: 15px;
     padding: 15px;
 }
 
 .home-icon {
     top: 30px;
-    position: absolute; /* Icon absolut positionieren */
-    left: 30px; /* Abstand vom linken Rand */
+    position: absolute;
+    left: 30px;
     color: #4a6fa5;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -55,11 +55,10 @@ footer{
 }
 
 .kyoryoku-icon {
-    border: #333;
-    border: 1px;
+    border: 1px solid transparent;
     top: 30px;
-    position: absolute; /* Icon absolut positionieren */
-    right: 30px; /* Abstand vom rechten Rand */
+    position: absolute;
+    right: 30px;
     color: #4a6fa5;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -82,7 +81,7 @@ footer{
 .kyoryoku-menu {
     font-size: 2rem;
     position: absolute;
-    top: 85px; /* etwas unter dem Icon */
+    top: 85px;
     right: 30px;
     background: white;
     border-radius: 10px;
@@ -109,7 +108,6 @@ footer{
     background: #f0f0f0;
 }
 
-/* Karteikarten-Stil */
 .flashcard {
     display: none;
     text-align: center;
@@ -128,7 +126,6 @@ footer{
     transform: translateY(-5px);
 }
 
-/* Text-Elemente */
 .solid {
     font-weight: 600;
     color: #2c3e50;
@@ -145,18 +142,17 @@ footer{
 }
 
 .japanese-display {
-    display: block; /* Stellt sicher, dass diese Gruppe eine eigene Zeile einnimmt */
-    margin-bottom: 20px; /* Abstand zwischen den japanischen Zeichen und den Buttons */
+    display: block;
+    margin-bottom: 20px;
     min-height: 1.6em;
 }
 
 .button-group {
-    display: block; /* Stellt sicher, dass die Button-Gruppe eine eigene Zeile einnimmt */
-    margin-top: 10px; /* Abstand nach oben */
-    text-align: center; /* Zentriert die Buttons innerhalb der Gruppe */
+    display: block;
+    margin-top: 10px;
+    text-align: center;
 }
 
-/* Buttons - Modernes Design */
 .btn {
     cursor: pointer;
     background: #4a6fa5;
@@ -183,7 +179,6 @@ footer{
     transform: scale(1.2);
 }
 
-/* Vergessen-Menü */
 #gewusst_optns, #vergessen_optns {
     cursor: pointer;
     display: none;
@@ -191,7 +186,6 @@ footer{
     border-radius: 8px;
     margin: 20px auto;
     max-width: 40%;
-    display: none;
     text-align: center;
 }
 
@@ -211,7 +205,6 @@ footer{
     color: white;
 }
 
-/* Review-Menüs */
 #reviewMenue, #reviewMenue2 {
     text-align: center;
     margin: 20px 0;
@@ -234,7 +227,6 @@ footer{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Responsive Design */
 @media (max-width: 600px) {
     .flashcard {
         margin: 15px;
