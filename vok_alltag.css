@@ -1,5 +1,106 @@
-login {
-    align-self: center;
+.input-group {
+    position: relative;
+    width: 380px; /* wie login_btn2 */
+    margin: 10px 0;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 10px;
+    font-size: 1.6rem;
+    border: 1px solid #333;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.input-group label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 1.6rem;
+    pointer-events: none;
+    transition: 0.2s ease all;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+    top: -4px;
+    left: 10px;
+    font-size: 1.6rem;
+    color: #4a6fa5;
+    background-color: wheat; /* gleiche Farbe wie Body/Hintergrund */
+    padding: 0 4px;
+}
+
+
+.link-container {
+    display: flex;
+    justify-content: center;  /* zentriert die Links */
+    align-items: center;
+    gap: 10px;               /* Abstand zwischen Links und Separator */
+    font-size: 1.8rem;
+}
+
+.separator {
+    justify-content: center;
+    align-items: center;
+    color: #999;
+}
+
+
+.switch-link {
+    color: #4a6fa5;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1.8rem; /* optional */
+    margin: 8px;
+}
+
+.switch-link:hover {
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertikal zentrieren */
+    align-items: center;     /* horizontal zentrieren */
+    text-align: center;
+    height: 100%;
+    gap: 20px; /* Abstand zwischen Elementen */
+}
+
+p.text{
+    color:#333;
+    font-size: 1.8rem;
+}
+
+.login_btn {
+    cursor: pointer;
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    padding: 10px 150px;
+    border-radius: 10px;
+    margin: 5px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.login_btn:hover {
+    background: #3a5a8a;
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.login_btn2 {
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px;
+    width: 340px; 
 }
 
 html {
