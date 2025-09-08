@@ -51,6 +51,7 @@ if ($action === "register") {
 <meta charset="UTF-8">
 <title>Login / Registrierung</title>
 <link rel="stylesheet" href="vok_alltag.css">
+<link rel="icon" type="image/x-icon" href="icons/favicon.ico">
 </head>
 <div class="login">
 <body>
