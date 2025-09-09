@@ -67,6 +67,6 @@ if (!isset($_SESSION["loggedin"])) {
 
 </body>
 
-<footer>Urheberrecht - (Home-Icon von Freepik - Quelle: https://www.flaticon.com/search?word=house) (Kyoryoku Icon mit KI erstellt)</footer>
+<footer>Urheberrecht - (Home-Icon von Freepik - Quelle: https://www.flaticon.com/search?word=house (Icon: "Auge", beim Passwort Feld von Gregor Cresnar)) (Kyoryoku Icon mit KI erstellt)</footer>
 
 </html>

@@ -1,7 +1,43 @@
+.password_hint {
+  color: tomato;
+  font-size: 1.6rem;
+  display: flex;
+  margin-left: 10px;
+  text-align: left;
+  bottom: -2rem;
+  position: absolute;
+  width: 120%; 
+
+}
+
+.login_register h4 {
+    margin-bottom: 10px; /* Abstand nach unten */
+    font-size: 3.5rem;    /* optional Schriftgröße anpassen */
+}
+
+.login_btn2.error {
+  border: 2px solid red;
+  background-color: #ffe5e5;
+}
+
+.error-message {
+  color: red;
+  font-size: 1.6rem;
+  display: none;
+  margin-left: 10px;
+  text-align: left;
+  position: absolute;
+  bottom: -1.8rem;
+}
+
+.error-message.active {
+  display: block;
+}
+
 .input-group {
     position: relative;
-    width: 380px; /* wie login_btn2 */
-    margin: 10px 0;
+    width: 230%;
+    margin: 15px 0;
 }
 
 .input-group input {
@@ -34,6 +70,40 @@
     padding: 0 4px;
 }
 
+.input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+input[type="password"] {
+    padding-right: 40px; /* Platz für das Auge + evtl. Browser-Icon */
+    font-size: 16px;
+}
+
+input[type="text"] {
+    padding-right: 40px; /* Platz für das Auge + evtl. Browser-Icon */
+    font-size: 16px;
+}
+
+.toggle-eye {
+    position: absolute;
+    top: 50%;
+    right: 8px; /* Abstand vom rechten Rand */
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10; /* Auge vor anderen Icons */
+    font-size: 18px;
+    user-select: none;
+}
+
+/* Auge-Icon positionieren */
+.input-group span.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
 
 .link-container {
     display: flex;
@@ -63,7 +133,7 @@
     text-decoration: none;
 }
 
-.login {
+.login_register {
     display: flex;
     flex-direction: column;
     justify-content: center; /* vertikal zentrieren */
@@ -82,10 +152,14 @@ p.text{
     cursor: pointer;
     background: #4a6fa5;
     color: white;
+    font-weight: bold;
     border: none;
-    padding: 10px 150px;
-    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    padding: 15px 150px;
+    border-radius: 20px;
     margin: 5px;
+    margin-top: 15px;
     transition: all 0.3s;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -100,7 +174,7 @@ p.text{
     border-radius: 8px;
     padding: 10px;
     margin: 5px;
-    width: 340px; 
+    width: 100%;
 }
 
 html {
