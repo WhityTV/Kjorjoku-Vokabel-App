@@ -16,8 +16,8 @@ if (!isset($_SESSION["loggedin"])) {
   <script src="vok_alltag.js" defer></script>
 </head>
 <body>
-  <div class="home-icon"><img src="icons/homeDark.png" alt="Home" width="32" height="32"></div>
-  <div class="kyoryoku-icon"><img src="icons/favicon.png" alt="Kyoryoku" width="46" height="46"></div>
+  <div class="home-icon"><img src="icons/homeDark.png" alt="Startseite" width="32" height="32"></div>
+  <div class="kyoryoku-icon"><img src="icons/favicon.png" alt="Profilbild" width="46" height="46"></div>
   <div class="kyoryoku-menu" id="kyoryokuMenu">
     <ul>
       <li>Profil</li>
