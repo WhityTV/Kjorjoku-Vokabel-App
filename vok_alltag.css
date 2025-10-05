@@ -1,13 +1,12 @@
 .password_hint {
-  color: tomato;
+  color:darkblue;
   font-size: 1.6rem;
   display: flex;
   margin-left: 10px;
   text-align: left;
-  bottom: -2rem;
+  bottom: -1.8rem;
   position: absolute;
   width: 120%; 
-
 }
 
 .login_register h4 {
@@ -16,12 +15,23 @@
 }
 
 .login_btn2.error {
-  border: 2px solid red;
+  border: 2px solid #8B0000;
   background-color: #ffe5e5;
 }
 
+.error-message.active::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: -2.5px;
+  background-image: url("icons/x.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .error-message {
-  color: red;
+  color: #8B0000;
   font-size: 1.6rem;
   display: none;
   margin-left: 10px;

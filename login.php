@@ -33,7 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <div class="login_register">
 
   <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
-  <h1></h1>
   <div id="loginForm">
     <h4>Login</h4>
     <form method="post">
