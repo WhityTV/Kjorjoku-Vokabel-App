@@ -81,12 +81,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       </small>
     </div>
 
-    <div class="input-group">
+    <div class="input-group password-with-tooltip">
       <input class="login_btn2 <?= isset($errors['password']) ? 'error' : '' ?>" 
-             type="password" name="password" id="register_password" required placeholder=" ">
+            type="password" name="password" id="register_password" required placeholder=" ">
       <label for="register_password">Passwort</label>
-      <small class="password_hint">Das Passwort soll mind. 8 Zeichen lang sein, sowie einen Groß-/Kleinbuchstaben, eine Zahl und ein Sonderzeichen enthalten!</small>
-      <span class="toggle-password" data-target="register_password" style="cursor:pointer;"><img src="icons/auge.png" width="20" height="20"></span>
+
+      <!-- Auge-Icon -->
+      <span class="toggle-password">
+        <img src="icons/auge.png" width="20" height="20" alt="Passwort anzeigen">
+      </span>
+
+      <!-- Info-Icon mit Tooltip -->
+      <span class="tooltip">
+        <img src="icons/i.png" alt="Info" width="20" height="20" class="tooltip-icon">
+        <span class="tooltip-text">
+          mind. 8 Zeichen </br> mind. ein Großbuchstabe </br> mind. ein Kleinbuchstabe </br> mind. eine Zahl </br> mind. ein Sonderzeichen
+        </span>
+      </span>
+
+      <small class="error-message <?= isset($errors['password']) ? 'active' : '' ?>">
+          <?= $errors['password'] ?? '' ?>
+      </small>
     </div>
 
     <div class="input-group">

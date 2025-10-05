@@ -1,13 +1,71 @@
-.password_hint {
-  color:darkblue;
-  font-size: 1.6rem;
-  display: flex;
-  margin-left: 10px;
-  text-align: left;
-  bottom: -1.8rem;
-  position: absolute;
-  width: 120%; 
+.password-with-tooltip {
+  position: relative;
 }
+
+.password-with-tooltip input {
+  width: 100%;
+  padding-right: 60px; /* Platz für beide Icons */
+  box-sizing: border-box;
+}
+
+/* Auge-Icon rechts */
+.password-with-tooltip .toggle-password {
+  position: absolute;
+  right: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: default; /* kein Klick nötig ohne JS */
+}
+
+/* Info-Icon rechts, neben Auge */
+.password-with-tooltip .tooltip {
+  position: absolute;
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.tooltip-icon {
+  cursor: help;
+}
+
+/* Tooltip-Text */
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  width: 170px;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  top: -5px;
+  left: 30px; /* links vom Icon */
+  font-size: 1.4rem;
+  transition: opacity 0.3s;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* Tooltip anzeigen beim Hover */
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.password_hint {
+    color: #333;
+    font-size: 1.8rem;
+    text-align: left;
+    margin: 0;
+    width: 100%;
+    position: static;        /* ✨ entfernt das absolute Positionieren */
+    display: inline;         /* ✨ kein flex, kein block */
+    margin-bottom: 2px;
+}
+
 
 .login_register h4 {
     margin-bottom: 10px; /* Abstand nach unten */
@@ -15,38 +73,38 @@
 }
 
 .login_btn2.error {
-  border: 2px solid #8B0000;
-  background-color: #ffe5e5;
+    border: 2px solid #8B0000;
+    background-color: #ffe5e5;
 }
 
 .error-message.active::before {
-  content: "";
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  vertical-align: -2.5px;
-  background-image: url("icons/x.png");
-  background-size: contain;
-  background-repeat: no-repeat;
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: -2.5px;
+    background-image: url("icons/x.png");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .error-message {
-  color: #8B0000;
-  font-size: 1.6rem;
-  display: none;
-  margin-left: 10px;
-  text-align: left;
-  position: absolute;
-  bottom: -1.8rem;
+    color: #8B0000;
+    font-size: 1.6rem;
+    display: none;
+    margin-left: 10px;
+    text-align: left;
+    position: absolute;
+    bottom: -1.8rem;
 }
 
 .error-message.active {
-  display: block;
+    display: block;
 }
 
 .input-group {
     position: relative;
-    width: 230%;
+    width: 100%;
     margin: 15px 0;
 }
 
