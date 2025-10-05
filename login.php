@@ -26,13 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <meta charset="UTF-8">
   <title>Login</title>
   <link rel="stylesheet" href="vok_alltag.css">
+  <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
   <script src="login_password_toggle.js" defer></script>
 </head>
 <body>
 <div class="login_register">
 
   <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
-
+  <h1></h1>
   <div id="loginForm">
     <h4>Login</h4>
     <form method="post">
@@ -43,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <div class="input-group">
         <input class="login_btn2" type="password" name="password" id="login_password" required placeholder=" ">
         <label for="login_password">Passwort</label>
-      <span id="togglePassword" style="cursor:pointer;"><img src="icons/auge.png" width="20" height="20"></span>
+      <span id="togglePassword" style="cursor:pointer;"><img src="icons/auge.png" alt="Auge" width="20" height="20"></span>
       </div>
       <button class="login_btn" type="submit">Anmelden</button>
       <p class="text">

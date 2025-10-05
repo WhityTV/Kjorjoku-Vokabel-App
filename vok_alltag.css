@@ -54,7 +54,7 @@
     top: 50%;
     left: 10px;
     transform: translateY(-50%);
-    color: #999;
+    color: #575757;
     font-size: 1.6rem;
     pointer-events: none;
     transition: 0.2s ease all;
@@ -116,12 +116,12 @@ input[type="text"] {
 .separator {
     justify-content: center;
     align-items: center;
-    color: #999;
+    color: #575757;
 }
 
 
 .switch-link {
-    color: #4a6fa5;
+    color: #3A5782;
     text-decoration: none;
     cursor: pointer;
     font-size: 1.8rem; /* optional */
