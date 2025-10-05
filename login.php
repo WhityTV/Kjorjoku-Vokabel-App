@@ -41,9 +41,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <label for="login_username">Benutzername</label>
       </div>
       <div class="input-group">
-        <input class="login_btn2" type="password" name="password" id="login_password" required placeholder=" ">
-        <label for="login_password">Passwort</label>
-      <span id="togglePassword" style="cursor:pointer;"><img src="icons/auge.png" alt="Auge" width="20" height="20"></span>
+          <input class="login_btn2" type="password" name="password" id="login_password" required placeholder=" ">
+          <label for="login_password">Passwort</label>
+          
+          <span class="toggle-password" id="togglePassword" role="button" tabindex="0" aria-label="Passwort anzeigen">
+              <img src="icons/auge.png" width="20" height="20" alt="Passwort anzeigen/ausblenden">
+          </span>
       </div>
       <button class="login_btn" type="submit">Anmelden</button>
       <p class="text">

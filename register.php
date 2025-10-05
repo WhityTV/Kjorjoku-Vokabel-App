@@ -14,30 +14,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Validierungen
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $errors['email'] = "Bitte gib eine gültige E-Mail-Adresse ein.";
+        $errors['email'] = "Bitte gib eine gültige E-Mail-Adresse ein.";
     }
     if ($password !== $confirm_password) {
-      $errors['password'] = "Passwörter stimmen nicht überein.";
+        $errors['password'] = "Passwörter stimmen nicht überein.";
     }
     if (strlen($password) < 8) {
-      $errors['password'] = "Das Passwort muss mindestens 8 Zeichen lang sein!";
+        $errors['password'] = "Das Passwort muss mindestens 8 Zeichen lang sein!";
     } elseif (!preg_match('/[A-Z]/', $password)) {
-      $errors['password'] = "Das Passwort muss mindestens einen Großbuchstaben enthalten!";
+        $errors['password'] = "Das Passwort muss mindestens einen Großbuchstaben enthalten!";
     } elseif (!preg_match('/[a-z]/', $password)) {
-      $errors['password'] = "Das Passwort muss mindestens einen Kleinbuchstaben enthalten!";
+        $errors['password'] = "Das Passwort muss mindestens einen Kleinbuchstaben enthalten!";
     } elseif (!preg_match('/[0-9]/', $password)) {
-      $errors['password'] = "Das Passwort muss mindestens eine Zahl enthalten!";
+        $errors['password'] = "Das Passwort muss mindestens eine Zahl enthalten!";
     } elseif (!preg_match('/[\W_]/', $password)) {
-      $errors['password'] = "Das Passwort muss mindestens ein Sonderzeichen enthalten!";
+        $errors['password'] = "Das Passwort muss mindestens ein Sonderzeichen enthalten!";
     } elseif ($password === $username) {
-      $errors['password'] = "Passwort und Benutzername dürfen nicht identisch sein!";
+        $errors['password'] = "Passwort und Benutzername dürfen nicht identisch sein!";
     }
     if (isset($users[$username])) {
-      $errors['username'] = "Benutzername bereits vergeben.";
+        $errors['username'] = "Benutzername bereits vergeben.";
     }
     // Mindestlänge Username
     if (strlen($username) < 3) {
-      $errors['username'] = "Der Benutzername muss mindestens 3 Zeichen lang sein.";
+        $errors['username'] = "Der Benutzername muss mindestens 3 Zeichen lang sein.";
     }
     // Wenn keine Fehler -> speichern
     if (empty($errors)) {
@@ -60,76 +60,76 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Registrieren</title>
-  <link rel="stylesheet" href="vok_alltag.css">
-  <script src="register_password_toggle.js" defer></script>
-  <script src="register_confirm_password_toggle.js" defer></script>
+    <meta charset="UTF-8">
+    <title>Registrieren</title>
+    <link rel="stylesheet" href="vok_alltag.css">
+    <script src="register_password_toggle.js" defer></script> 
+    <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
 </head>
 <body>
 <div class="login_register">
 <h4>Konto erstellen</h4>
 
-  <form method="post" novalidate>
-    <div class="input-group">
-      <input class="login_btn2 <?= isset($errors['username']) ? 'error' : '' ?>" 
-             type="text" name="username" id="register_username" required placeholder=" "
-             value="<?= htmlspecialchars($_POST['username'] ?? '') ?>">
-      <label for="register_username">Benutzername</label>
-      <small class="error-message <?= isset($errors['username']) ? 'active' : '' ?>">
-          <?= $errors['username'] ?? '' ?>
-      </small>
-    </div>
+    <form method="post" novalidate>
+        <div class="input-group">
+            <input class="login_btn2 <?= isset($errors['username']) ? 'error' : '' ?>" 
+                    type="text" name="username" id="register_username" required placeholder=" "
+                    value="<?= htmlspecialchars($_POST['username'] ?? '') ?>">
+            <label for="register_username">Benutzername</label>
+            <small class="error-message <?= isset($errors['username']) ? 'active' : '' ?>">
+                <?= $errors['username'] ?? '' ?>
+            </small>
+        </div>
 
-    <div class="input-group password-with-tooltip">
-      <input class="login_btn2 <?= isset($errors['password']) ? 'error' : '' ?>" 
-            type="password" name="password" id="register_password" required placeholder=" ">
-      <label for="register_password">Passwort</label>
+        <div class="input-group password-with-tooltip">
+            <input class="login_btn2 <?= isset($errors['password']) ? 'error' : '' ?>" 
+                    type="password" name="password" id="register_password" required placeholder=" ">
+            <label for="register_password">Passwort</label>
 
-      <!-- Auge-Icon -->
-      <span class="toggle-password">
-        <img src="icons/auge.png" width="20" height="20" alt="Passwort anzeigen">
-      </span>
+            <span class="toggle-password" data-target="register_password" id="toggleRegisterPassword" role="button" tabindex="0" aria-label="Passwort anzeigen">
+                <img src="icons/auge.png" width="20" height="20" alt="Passwort anzeigen/ausblenden"> </span>
 
-      <!-- Info-Icon mit Tooltip -->
-      <span class="tooltip">
-        <img src="icons/i.png" alt="Info" width="20" height="20" class="tooltip-icon">
-        <span class="tooltip-text">
-          mind. 8 Zeichen </br> mind. ein Großbuchstabe </br> mind. ein Kleinbuchstabe </br> mind. eine Zahl </br> mind. ein Sonderzeichen
-        </span>
-      </span>
+            <span class="tooltip">
+                <img src="icons/i.png" alt="Info" width="20" height="20" class="tooltip-icon">
+                <span class="tooltip-text">
+                    mind. 8 Zeichen </br> mind. ein Großbuchstabe </br> mind. ein Kleinbuchstabe </br> mind. eine Zahl </br> mind. ein Sonderzeichen
+                </span>
+            </span>
 
-      <small class="error-message <?= isset($errors['password']) ? 'active' : '' ?>">
-          <?= $errors['password'] ?? '' ?>
-      </small>
-    </div>
+            <small class="error-message <?= isset($errors['password']) ? 'active' : '' ?>">
+                <?= $errors['password'] ?? '' ?>
+            </small>
+        </div>
 
-    <div class="input-group">
-      <input class="login_btn2 <?= isset($errors['password']) ? 'error' : '' ?>" 
-             type="password" name="confirm_password" id="register_confirm_password" required placeholder=" ">
-      <label for="register_confirm_password">Passwort bestätigen</label>
-      <span class="toggle-password" data-target="register_password" id="toggleConfirmPassword" style="cursor:pointer;"><img src="icons/auge.png" width="20" height="20"></span>
-      <small class="error-message <?= isset($errors['password']) ? 'active' : '' ?>">
-          <?= $errors['password'] ?? '' ?>
-      </small>
-    </div>
+        <div class="input-group password-with-tooltip">
+            <input class="login_btn2 <?= isset($errors['password']) ? 'error' : '' ?>" 
+                    type="password" name="confirm_password" id="register_confirm_password" required placeholder=" ">
+            <label for="register_confirm_password">Passwort bestätigen</label>
+            
+            <span class="toggle-password" data-target="register_confirm_password" id="toggleConfirmPassword" style="cursor:pointer;" role="button" tabindex="0" aria-label="Passwort anzeigen">
+                <img src="icons/auge.png" width="20" height="20" alt="Passwort anzeigen/ausblenden"> </span>
+            
+            <small class="error-message <?= isset($errors['password']) ? 'active' : '' ?>">
+                <?= $errors['password'] ?? '' ?>
+            </small>
+        </div>
 
-    <div class="input-group">
-      <input class="login_btn2 <?= isset($errors['email']) ? 'error' : '' ?>" 
-            type="email" name="email" id="register_email" required placeholder=" "
-            value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
-      <label for="register_email">E-Mail-Adresse</label>
-      <small class="error-message <?= isset($errors['email']) ? 'active' : '' ?>">
-          <?= htmlspecialchars($errors['email'] ?? '') ?>
-      </small>
-    </div>
+        <div class="input-group">
+            <input class="login_btn2 <?= isset($errors['email']) ? 'error' : '' ?>" 
+                    type="email" name="email" id="register_email" required placeholder=" "
+                    value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+            <label for="register_email">E-Mail-Adresse</label>
+            <small class="error-message <?= isset($errors['email']) ? 'active' : '' ?>">
+                <?= htmlspecialchars($errors['email'] ?? '') ?>
+            </small>
+        </div>
 
-    <button class="login_btn" type="submit">Registrieren</button>
-    <p class="text">
-      Du hast bereits ein Konto?
-      <a href="login.php" class="switch-link">LOGIN</a>
-    </p>
-  </form>
+        <button class="login_btn" type="submit">Registrieren</button>
+        <p class="text">
+            Du hast bereits ein Konto?
+            <a href="login.php" class="switch-link">LOGIN</a>
+        </p>
+    </form>
 </div>
 </body>
 </html>
