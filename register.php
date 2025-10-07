@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <span class="toggle-password" data-target="register_password" id="toggleRegisterPassword" role="button" tabindex="0" aria-label="Passwort anzeigen">
                 <img src="icons/auge.png" width="20" height="20" alt="Passwort anzeigen/ausblenden"> </span>
 
-            <span class="tooltip">
+            <span class="tooltip" role="button" tabindex="0" aria-label="Passwortanforderungen anzeigen">
                 <img src="icons/i.png" alt="Info" width="20" height="20" class="tooltip-icon">
                 <span class="tooltip-text">
                     mind. 8 Zeichen </br> mind. ein Großbuchstabe </br> mind. ein Kleinbuchstabe </br> mind. eine Zahl </br> mind. ein Sonderzeichen
