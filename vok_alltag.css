@@ -288,9 +288,14 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
+}
+
+.home-icon.active {
+  background-color: darkgray;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .home-icon:hover {
@@ -299,6 +304,31 @@ footer{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     align-items: center;
     justify-content: center
+}
+
+.karteikarten-icon {
+    top: 100px; /* Abstand vom oberen Rand, anpassen */
+    position: absolute;
+    left: 30px; /* gleiche linke Position wie Home */
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* rund wie Home */
+}
+
+.karteikarten-icon a img {
+    display: block;
+    width: 36px;
+    height: 36px;
+}
+
+.karteikarten-icon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .kyoryoku-icon {
@@ -312,8 +342,8 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 46px;
-    height: 46px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
 }
 
