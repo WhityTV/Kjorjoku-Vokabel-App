@@ -16,13 +16,14 @@ if (!isset($_SESSION["loggedin"])) {
     <title>Startseite</title>
     <link rel="stylesheet" href="vok_alltag.css">
     <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+    <script src="home.js" defer></script>
 </head>
 <body>
     <div class="home-icon <?php echo basename($_SERVER['PHP_SELF']) === 'home.php' ? 'active' : ''; ?>">
         <img src="icons/homeDark.png" alt="Startseite" width="32" height="32">
     </div>
     <div class="karteikarten-icon">
-        <a href="app.html" class="karteikarten-link">
+        <a href="app.php" class="karteikarten-link">
             <img src="icons/karteikarten.png" alt="Karteikarten" width="38" height="38">
         </a>
     </div>
@@ -35,7 +36,25 @@ if (!isset($_SESSION["loggedin"])) {
         <li>Abmelden</li>
         </ul>
     </div>
-
+    <div class="header-home">
+    <h1 class="title">Vokabeln lernen leichtgemacht</h1>
+    </div>
+    <p class="text-home">Kyoryoku begleitet dich beim täglichen Lernen <br /> einfach, intuitiv und zuverlässig <br /> damit Wissen wirklich bleibt.</p>
+    <button class="start_btn">Jetzt direkt loslegen ⭢</button>
+    <div class="example_imgs">
+        <div class="example_img1">
+            <img src="icons/beispiel1.png" alt="Beispiel1" width="300" height="170">
+        </div>
+        <div class="example_img2">
+            <img src="icons/beispiel2.png" alt="Beispiel2" width="320" height="200">
+        </div>
+        <div class="example_img3">
+            <img src="icons/beispiel3.png" alt="Beispiel3" width="320" height="200">
+        </div>
+        <div class="example_img4">
+            <img src="icons/beispiel4.png" alt="Beispiel4" width="320" height="197">
+        </div>
+    </div>
 </body>
 
 <footer>

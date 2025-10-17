@@ -214,6 +214,7 @@ input[type="text"] {
 p.text{
     color:#333;
     font-size: 1.8rem;
+    text-align: center;
 }
 
 .login_btn {
@@ -270,12 +271,84 @@ footer{
     margin-bottom: 10px;
 }
 
+  p.text-home{
+    color:black;
+    font-size: 2.4rem;
+    text-align: left;
+    margin-left: 21%;
+    line-height: 1.3;
+}
+
+.start_btn {
+    cursor: pointer;
+    background: blueviolet;
+    color: white;
+    font-weight: bold;
+    border: none;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 20px;
+    margin: 5px;
+    margin-left: 21%;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.example_imgs{
+    margin-top: -290px;
+    margin-left: 0%;
+}
+
+.example_img1{
+    margin-top: -270px;
+    margin-left: 55%;
+}
+
+.example_img2{
+    margin-top: 0px;
+    margin-left: 54.5%;
+}
+
+.example_img3{
+    margin-top: -5px;
+    margin-left: 60.5%;
+}
+
+.example_img4{
+    margin-top: -206px;
+    margin-left: 48.5%;
+}
+
 .header {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
     padding: 15px;
+}
+
+.header-home {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    margin-top: 50px;
+    margin-left: 20%;
+    gap: 15px;
+    padding: 15px;
+
+    font-size: 4rem;
+    font-weight: bold;
+
+    /* Farbverlauf */
+    background: linear-gradient(to top, deeppink, darkorchid);
+    
+    /* Text wird durchsichtig, Hintergrundfarbe zeigt sich */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Optional: für andere Browser */
+    background-clip: text;
+    color: transparent;
 }
 
 .home-icon {
@@ -306,30 +379,35 @@ footer{
     justify-content: center
 }
 
-.karteikarten-icon {
-    top: 100px; /* Abstand vom oberen Rand, anpassen */
-    position: absolute;
-    left: 30px; /* gleiche linke Position wie Home */
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%; /* rund wie Home */
-}
+    .karteikarten-icon {
+        top: 100px; /* Abstand vom oberen Rand, anpassen */
+        position: absolute;
+        left: 30px; /* gleiche linke Position wie Home */
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%; /* rund wie Home */
+    }
 
-.karteikarten-icon a img {
-    display: block;
-    width: 36px;
-    height: 36px;
-}
+    .karteikarten-icon.active {
+        background-color: darkgray;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
 
-.karteikarten-icon:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
+    .karteikarten-icon a img {
+        display: block;
+        width: 36px;
+        height: 36px;
+    }
+
+    .karteikarten-icon:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
 
 .kyoryoku-icon {
     border: 1px solid transparent;
