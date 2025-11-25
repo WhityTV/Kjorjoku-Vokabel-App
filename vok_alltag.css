@@ -441,7 +441,7 @@ footer{
     background: white;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    width: 200px;
+    width: 225px;
     padding: 10px 0;
     display: none;
     z-index: 1000;
@@ -450,7 +450,7 @@ footer{
 .kyoryoku-menu ul {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0px;
 }
 
 .kyoryoku-menu li {
@@ -461,6 +461,73 @@ footer{
 
 .kyoryoku-menu li:hover {
     background: #f0f0f0;
+}
+
+.kyoryoku-menu li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.switch_acc_container {
+    position: relative; /* wichtig für absolute Position der Text-Box */
+    display: inline-block; /* damit Höhe vom Button übernommen wird */
+}
+
+.switch_acc_btn {
+    font-size: 2.4rem;
+    cursor: pointer;    
+    background: mediumpurple;
+    width: 27px;
+    font-weight: bold;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    position: relative; /* damit Tooltip relativ zum Button positioniert wird */
+}
+
+.switch_acc_text {
+    visibility: hidden;
+    position: absolute;
+    top: 100%; /* direkt unter dem Button */
+    left: 50%; /* horizontal mittig am Button */
+    transform: translateX(-70%) translateY(5px); /* mittig + kleiner Abstand nach unten */
+    font-size: 2rem;
+    background: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    white-space: nowrap; /* verhindert Zeilenumbruch */
+    z-index: 100;
+}
+
+.switch_acc_container:hover .switch_acc_text {
+    visibility: visible;
+}
+
+.user_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 25px;
+}
+
+.other_account_btn {
+    background: mediumpurple;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 4px 8px;
+    margin: 2px 0;
+    cursor: pointer;
+    font-size: 1.8rem;
+}
+
+.other_account_btn:hover {
+    background: rebeccapurple;
 }
 
 .flashcard {

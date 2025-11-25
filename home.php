@@ -31,9 +31,30 @@ if (!isset($_SESSION["loggedin"])) {
     <div class="kyoryoku-icon"><img src="icons/favicon.png" alt="Profilbild" width="46" height="46"></div>
     <div class="kyoryoku-menu" id="kyoryokuMenu">
         <ul>
-        <li>Profil</li>
-        <li>Einstellungen</li>
-        <li>Abmelden</li>
+            <li class="user_row">
+                <span><?php echo htmlspecialchars($_SESSION['user'], ENT_QUOTES, 'UTF-8'); ?></span>
+                <div class="switch_acc_container">
+                    <span class="switch_acc_text"> Account wechseln
+                        <?php 
+                            if (isset($_SESSION['accounts'])) {
+                                foreach ($_SESSION['accounts'] as $account) {
+                                    if ($account !== $_SESSION['user']) {
+                                        echo '<form method="post" action="switch_account.php" style="margin:0;">
+                                                <input type="hidden" name="user" value="'.$account.'">
+                                                <button type="submit" class="other_account_btn">'.$account.'</button>
+                                            </form>';
+                                    }
+                                }
+                            }
+                        ?>
+                    </span>
+                    <button class = "switch_acc_btn" alt="Change account"> ⇄ </button>
+                </div>
+            </li>
+            <li>Einstellungen</li>
+            <li>
+                <a href="login.php">Abmelden</a>
+            </li>
         </ul>
     </div>
     <div class="header-home">

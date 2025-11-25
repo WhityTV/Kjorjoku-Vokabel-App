@@ -18,7 +18,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         $error = "Falscher Benutzername oder Passwort!";
     }
+
+if (!isset($_SESSION['accounts'])) {
+    $_SESSION['accounts'] = [];
 }
+
+// Füge aktuellen Benutzer zur Liste hinzu, falls noch nicht drin
+if (!in_array($username, $_SESSION['accounts'])) {
+    $_SESSION['accounts'][] = $username;
+}
+
+// Setze den aktuellen Benutzer
+$_SESSION['user'] = $username;
+$_SESSION['loggedin'] = true;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="de">
