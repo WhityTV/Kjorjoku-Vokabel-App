@@ -10,30 +10,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_POST["username"] ?? "";
     $password = $_POST["password"] ?? "";
 
+    // Nur Accounts aus JSON erlauben
     if (isset($users[$username]) && password_verify($password, $users[$username]["password"])) {
-        $_SESSION["loggedin"] = true;
-        $_SESSION["user"] = $username;
+        if (!isset($_SESSION['loggedin_users'])) {
+            $_SESSION['loggedin_users'] = [];
+        }
+
+        // Multi-Account-Logik
+        $_SESSION['loggedin_users'][$username] = true;
+        $_SESSION['current_user'] = $username;
+
+        // Alte Struktur für home.php
+        $_SESSION['loggedin'] = true;
+        $_SESSION['user'] = $username;
+
         header("Location: home.php");
         exit;
     } else {
         $error = "Falscher Benutzername oder Passwort!";
     }
-
-if (!isset($_SESSION['accounts'])) {
-    $_SESSION['accounts'] = [];
 }
-
-// Füge aktuellen Benutzer zur Liste hinzu, falls noch nicht drin
-if (!in_array($username, $_SESSION['accounts'])) {
-    $_SESSION['accounts'][] = $username;
-}
-
-// Setze den aktuellen Benutzer
-$_SESSION['user'] = $username;
-$_SESSION['loggedin'] = true;
-}
-
 ?>
+
 <!DOCTYPE html>
 <html lang="de">
 <head>

@@ -1,12 +1,13 @@
 <?php
-
 session_start();
-if (!isset($_SESSION["loggedin"])) {
+
+// Sicherstellen, dass man eingeloggt ist
+if (!isset($_SESSION["loggedin"]) || !isset($_SESSION['user'])) {
     header("Location: login.php");
     exit;
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="de">
@@ -33,27 +34,27 @@ if (!isset($_SESSION["loggedin"])) {
         <ul>
             <li class="user_row">
                 <span><?php echo htmlspecialchars($_SESSION['user'], ENT_QUOTES, 'UTF-8'); ?></span>
-                <div class="switch_acc_container">
-                    <span class="switch_acc_text"> Account wechseln
-                        <?php 
-                            if (isset($_SESSION['accounts'])) {
-                                foreach ($_SESSION['accounts'] as $account) {
-                                    if ($account !== $_SESSION['user']) {
-                                        echo '<form method="post" action="switch_account.php" style="margin:0;">
-                                                <input type="hidden" name="user" value="'.$account.'">
-                                                <button type="submit" class="other_account_btn">'.$account.'</button>
-                                            </form>';
-                                    }
+                    <div class="switch_acc_container">
+                        <button class="switch_acc_btn" alt="Change account"> ⇄ </button>
+                        <div class="accounts_list"> <?php if (isset($_SESSION['loggedin_users'])) {
+                            foreach ($_SESSION['loggedin_users'] as $account => $active) {
+                                if ($account !== $_SESSION['current_user']) {
+                                    echo '<form method="post" action="switch_account.php" style="margin:0;">
+                                    <input type="hidden" name="user" value="'.$account.'">
+                                    <button type="submit" class="account_switch">'.$account.'</button> </form>';
                                 }
                             }
+                        }
                         ?>
-                    </span>
-                    <button class = "switch_acc_btn" alt="Change account"> ⇄ </button>
-                </div>
+                            <form method="get" action="login.php" style="margin-top:5px;">
+                                <button type="submit" class="account_switch">Account hinzufügen</button><img src="icons/plus.png" alt="Account hinzufügen" width="25" height="25" style="vertical-align: top; margin-left: 8px;">
+                            </form>
+                        </div> 
+                    </div>
             </li>
             <li>Einstellungen</li>
             <li>
-                <a href="login.php">Abmelden</a>
+                <a href="logout.php">Abmelden</a>
             </li>
         </ul>
     </div>

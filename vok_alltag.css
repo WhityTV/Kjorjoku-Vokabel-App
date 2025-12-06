@@ -469,14 +469,14 @@ footer{
 }
 
 .switch_acc_container {
-    position: relative; /* wichtig für absolute Position der Text-Box */
-    display: inline-block; /* damit Höhe vom Button übernommen wird */
+    position: relative;
+    display: inline-block;
 }
 
 .switch_acc_btn {
     font-size: 2.4rem;
-    cursor: pointer;    
-    background: mediumpurple;
+    cursor: pointer;
+    background: #9370d8;
     width: 27px;
     font-weight: bold;
     border-radius: 50%;
@@ -486,33 +486,62 @@ footer{
     align-items: center;
     justify-content: center;
     line-height: 1;
-    position: relative; /* damit Tooltip relativ zum Button positioniert wird */
 }
 
-.switch_acc_text {
-    visibility: hidden;
+.accounts_list {
+    display: flex; /* damit flex-direction und gap wirken */
     position: absolute;
-    top: 100%; /* direkt unter dem Button */
-    left: 50%; /* horizontal mittig am Button */
-    transform: translateX(-70%) translateY(5px); /* mittig + kleiner Abstand nach unten */
+    top: 120%;
+    right: 0;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    padding: 12px;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 100;
+    min-width: 220px;
+    text-align: left;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.account_switch {
     font-size: 2rem;
     background: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    white-space: nowrap; /* verhindert Zeilenumbruch */
-    z-index: 100;
+    border: none;
+    color: #333;
+    line-height: 1;
+    text-align: left;
 }
 
-.switch_acc_container:hover .switch_acc_text {
-    visibility: visible;
+.switch_acc_container.active .accounts_list {
+    display: flex; /* sichtbar, wenn active */
 }
+
 
 .user_row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 25px;
+}
+
+.other_account_text {
+    font-size: 1.8rem;
+    color: #4a6fa5;
+    margin: 2px 0;
+}
+
+.other_account_text a {
+    text-decoration: none;
+    color: #4a6fa5;
+    display: block;  /* gesamter Text klickbar */
+    text-align: left; /* Linktext linksbündig */
+}
+
+.other_account_text a:hover {
+    text-decoration: underline;
 }
 
 .other_account_btn {
