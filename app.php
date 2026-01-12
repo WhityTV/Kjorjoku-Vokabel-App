@@ -103,6 +103,11 @@ if (!isset($_SESSION["loggedin"]) || !isset($_SESSION['user'])) {
 
 </body>
 
-<footer>Urheberrecht - (Home-Icon von Freepik - Quelle: https://www.flaticon.com/search?word=house (Icon: "Auge", beim Passwort Feld von Gregor Cresnar)) (Kyoryoku Icon mit KI erstellt)</footer>
+<footer>
+  © 2026 Kyoryoku | 
+  <a href="impressum.php">Impressum</a> | 
+  <a href="datenschutz.php">Datenschutz</a> | 
+  <a href="credits.php">Credits & Urheberrecht</a>
+</footer>
 
 </html>

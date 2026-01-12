@@ -82,8 +82,10 @@ if (!isset($_SESSION["loggedin"]) || !isset($_SESSION['user'])) {
 </body>
 
 <footer>
-  Urheberrecht - (Icons von: 
-  <a href="https://www.flaticon.com" target="_blank" rel="noopener noreferrer">Flaticon</a> | Home Icon von Freepik, Augen-Icon beim Passwort-Feld von Gregor Cresnar, X-Icon bei Fehlermeldungen beim Registrieren von Alfredo Hernandez, I/Info/Tooltip Icon von IconsBox, Karteikarten Icon von Tempo_doloe) | Kyoryoku-Icon mit KI erstellt
+  © 2026 Kyoryoku | 
+  <a href="impressum.php">Impressum</a> | 
+  <a href="datenschutz.php">Datenschutz</a> | 
+  <a href="credits.php">Credits & Urheberrecht</a>
 </footer>
 
 
