@@ -17,7 +17,7 @@ if (!isset($_SESSION["loggedin"]) || !isset($_SESSION['user'])) {
     <title>Startseite</title>
     <link rel="stylesheet" href="vok_alltag.css">
     <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
-    <script src="home.js" defer></script>
+    <script src="menu.js" defer></script>
 </head>
 <body>
     <div class="home-icon <?php echo basename($_SERVER['PHP_SELF']) === 'home.php' ? 'active' : ''; ?>">
@@ -47,12 +47,14 @@ if (!isset($_SESSION["loggedin"]) || !isset($_SESSION['user'])) {
                         }
                         ?>
                             <form method="get" action="login.php" style="margin-top:5px;">
-                                <button type="submit" class="account_switch">Account hinzufügen</button><img src="icons/plus.png" alt="Account hinzufügen" width="25" height="25" style="vertical-align: top; margin-left: 8px;">
+                                <button type="submit" class="account_switch" style="display: flex; align-items: center; gap: 15px; width: auto; white-space: nowrap;">Account hinzufügen <img src="icons/plus.png" alt="Account hinzufügen" width="24" height="24"></button>
                             </form>
                         </div> 
                     </div>
             </li>
-            <li>Einstellungen</li>
+            <li>
+                <a href="settings.php" style="text-decoration: none; color: inherit;">Einstellungen</a>
+            </li>
             <li>
                 <a href="logout.php">Abmelden</a>
             </li>

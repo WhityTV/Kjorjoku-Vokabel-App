@@ -44,6 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
 <div class="login_register">
 
+  <?php if (isset($_GET['deleted']) && $_GET['deleted'] == 1): ?>
+    <p style='color: green; font-size: 1.8rem;'>Konto erfolgreich gelöscht!</p>
+  <?php endif; ?>
+
   <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
   <div id="loginForm">
     <h4>Login</h4>

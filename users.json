@@ -2,6 +2,17 @@
     "Whity": {
         "uid": "user_68c067bc475ca6.10965455",
         "password": "$2y$10$sXOLk9a5cr91e2qIHDgj8.hEzrTGmw.Hs5qw4yN1ZdmUeEVAp2.U6",
-        "email": "kindsvatermax34@gmail.com"
+        "email": "kindsvatermax34@gmail.com",
+        "settings": {
+            "daily_goal": 20,
+            "learning_mode": "normal",
+            "notifications": 1,
+            "dark_mode": 0
+        }
+    },
+    "testAccount": {
+        "uid": "user_6964c419b12659.34805674",
+        "password": "$2y$10$NEq2HFnsH65QkmYiP4A2JO1iMqXTPi7cavbD0c3KFlwwvZSsy0huG",
+        "email": "kindsvatermax344@gmail.com"
     }
 }

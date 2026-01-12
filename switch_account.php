@@ -6,6 +6,7 @@ $users = file_exists($usersFile) ? json_decode(file_get_contents($usersFile), tr
 
 if (isset($_POST['user']) && isset($_SESSION['loggedin_users'][$_POST['user']]) && isset($users[$_POST['user']])) {
     $_SESSION['current_user'] = $_POST['user'];
+    $_SESSION['user'] = $_POST['user'];
 }
 
 header("Location: home.php");

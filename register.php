@@ -45,13 +45,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $users[$username] = [
             "uid" => $uid,
             "password" => password_hash($password, PASSWORD_DEFAULT),
-            "email" => $email
+            "email" => $email,
+            "settings" => [
+                "daily_goal" => 20,
+                "learning_mode" => "normal",
+                "notifications" => 1,
+                "dark_mode" => 0
+            ]
         ];
         file_put_contents($usersFile, json_encode($users, JSON_PRETTY_PRINT));
         $_SESSION["loggedin"] = true;
         $_SESSION["user"] = $username;
         $_SESSION["uid"] = $uid; // optional für Session
-        header("Location: app.php");
+        header("Location: home.php");
         exit;
     }
 }

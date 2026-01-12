@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Sicherstellen, dass man eingeloggt ist
+if (!isset($_SESSION["loggedin"]) || !isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -5,6 +15,7 @@
   <title>Kyoryoku</title>
   <link rel="stylesheet" href="vok_alltag.css">
   <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+  <script src="menu.js" defer></script>
   <script src="vok_alltag.js" defer></script>
 </head>
 <body>
@@ -22,9 +33,32 @@
   <div class="kyoryoku-icon"><img src="icons/favicon.png" alt="Profilbild" width="46" height="46"></div>
   <div class="kyoryoku-menu" id="kyoryokuMenu">
     <ul>
-      <li>Profil</li>
-      <li>Einstellungen</li>
-      <li>Abmelden</li>
+      <li class="user_row">
+        <span><?php echo htmlspecialchars($_SESSION['user'], ENT_QUOTES, 'UTF-8'); ?></span>
+          <div class="switch_acc_container">
+            <button class="switch_acc_btn" alt="Change account"> ⇄ </button>
+            <div class="accounts_list"> <?php if (isset($_SESSION['loggedin_users'])) {
+              foreach ($_SESSION['loggedin_users'] as $account => $active) {
+                if ($account !== $_SESSION['current_user']) {
+                  echo '<form method="post" action="switch_account.php" style="margin:0;">
+                  <input type="hidden" name="user" value="'.$account.'">
+                  <button type="submit" class="account_switch">'.$account.'</button> </form>';
+                }
+              }
+            }
+            ?>
+              <form method="get" action="login.php" style="margin-top:5px;">
+                <button type="submit" class="account_switch" style="display: flex; align-items: center; gap: 15px; width: auto; white-space: nowrap;">Account hinzufügen <img src="icons/plus.png" alt="Account hinzufügen" width="24" height="24"></button>
+              </form>
+            </div> 
+          </div>
+      </li>
+      <li>
+        <a href="settings.php" style="text-decoration: none; color: inherit;">Einstellungen</a>
+      </li>
+      <li>
+        <a href="logout.php">Abmelden</a>
+      </li>
     </ul>
   </div>
   <div class="header">
