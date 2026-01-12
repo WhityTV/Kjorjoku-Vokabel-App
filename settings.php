@@ -54,6 +54,79 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $messageType = 'success';
                 }
             }
+        } elseif ($_POST['action'] === 'upload_profile_picture') {
+            // Profilbild hochladen
+            if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = __DIR__ . '/profile_images/';
+                
+                // Ordner erstellen, falls nicht vorhanden
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0755, true);
+                }
+                
+                $fileTmpPath = $_FILES['profile_picture']['tmp_name'];
+                $fileName = $_FILES['profile_picture']['name'];
+                $fileSize = $_FILES['profile_picture']['size'];
+                $fileType = $_FILES['profile_picture']['type'];
+                $fileNameCmps = explode(".", $fileName);
+                $fileExtension = strtolower(end($fileNameCmps));
+                
+                // Erlaubte Dateitypen
+                $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+                
+                if (in_array($fileExtension, $allowedExtensions)) {
+                    // Dateiname: username.extension
+                    $newFileName = $currentUser . '.' . $fileExtension;
+                    $destPath = $uploadDir . $newFileName;
+                    
+                    // Maximale Dateigröße: 5MB
+                    if ($fileSize < 5000000) {
+                        if (move_uploaded_file($fileTmpPath, $destPath)) {
+                            // Altes Profilbild löschen, falls vorhanden
+                            if (isset($users[$currentUser]['profile_picture']) && 
+                                file_exists(__DIR__ . '/' . $users[$currentUser]['profile_picture'])) {
+                                unlink(__DIR__ . '/' . $users[$currentUser]['profile_picture']);
+                            }
+                            
+                            $users[$currentUser]['profile_picture'] = 'profile_images/' . $newFileName;
+                            file_put_contents($usersFile, json_encode($users, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                            
+                            $message = 'Profilbild erfolgreich hochgeladen!';
+                            $messageType = 'success';
+                        } else {
+                            $message = 'Fehler beim Hochladen des Bildes!';
+                            $messageType = 'error';
+                        }
+                    } else {
+                        $message = 'Datei ist zu groß! Maximale Größe: 5MB';
+                        $messageType = 'error';
+                    }
+                } else {
+                    $message = 'Ungültiger Dateityp! Erlaubt: JPG, JPEG, PNG, GIF';
+                    $messageType = 'error';
+                }
+            } else {
+                $message = 'Bitte wähle ein Bild aus!';
+                $messageType = 'error';
+            }
+        } elseif ($_POST['action'] === 'remove_profile_picture') {
+            // Profilbild entfernen
+            if (isset($users[$currentUser]['profile_picture'])) {
+                // Datei löschen, falls vorhanden
+                if (file_exists(__DIR__ . '/' . $users[$currentUser]['profile_picture'])) {
+                    unlink(__DIR__ . '/' . $users[$currentUser]['profile_picture']);
+                }
+                
+                // Aus JSON entfernen
+                unset($users[$currentUser]['profile_picture']);
+                file_put_contents($usersFile, json_encode($users, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                
+                $message = 'Profilbild erfolgreich entfernt!';
+                $messageType = 'success';
+            } else {
+                $message = 'Kein Profilbild vorhanden!';
+                $messageType = 'error';
+            }
         } elseif ($_POST['action'] === 'change_password') {
             $currentPassword = $_POST['current_password'] ?? '';
             $newPassword = $_POST['new_password'] ?? '';
@@ -100,6 +173,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+// Benutzerdaten NACH allen POST-Verarbeitungen neu laden
+$users = file_exists($usersFile) ? json_decode(file_get_contents($usersFile), true) : [];
 $userData = $users[$currentUser] ?? [];
 $settings = $userData['settings'] ?? [
     'daily_goal' => 20,
@@ -107,6 +182,11 @@ $settings = $userData['settings'] ?? [
     'notifications' => 1,
     'dark_mode' => 0
 ];
+
+// Profilbild-Pfad bestimmen (muss nach allen POST-Verarbeitungen erfolgen)
+$profilePicture = isset($userData['profile_picture']) && file_exists(__DIR__ . '/' . $userData['profile_picture']) 
+    ? $userData['profile_picture'] 
+    : 'icons/favicon.png';
 ?>
 
 <!DOCTYPE html>
@@ -275,7 +355,7 @@ $settings = $userData['settings'] ?? [
         </a>
     </div>
 
-    <div class="kyoryoku-icon"><img src="icons/favicon.png" alt="Profilbild" width="46" height="46"></div>
+    <div class="kyoryoku-icon"><img src="<?php echo htmlspecialchars($profilePicture, ENT_QUOTES, 'UTF-8'); ?>" alt="Profilbild" width="46" height="46" style="border-radius: 50%; object-fit: cover;"></div>
     <div class="kyoryoku-menu" id="kyoryokuMenu">
         <ul>
             <li class="user_row">
@@ -301,6 +381,47 @@ $settings = $userData['settings'] ?? [
         <!-- Profileinstellungen -->
         <div class="settings-section">
             <h3>👤 Profil</h3>
+            
+            <div class="form-group">
+                <label>Profilbild:</label>
+                <div style="display: flex; align-items: center; gap: 20px; margin: 10px 0;">
+                    <?php if (isset($userData['profile_picture']) && file_exists(__DIR__ . '/' . $userData['profile_picture'])): ?>
+                        <img src="<?php echo htmlspecialchars($userData['profile_picture'], ENT_QUOTES, 'UTF-8'); ?>" 
+                             alt="Profilbild" 
+                             style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #4a6fa5;">
+                    <?php else: ?>
+                        <div style="width: 100px; height: 100px; border-radius: 50%; background: #e0e0e0; display: flex; align-items: center; justify-content: center; border: 3px solid #4a6fa5;">
+                            <img src="icons/favicon.png" alt="Standard Profilbild" width="60" height="60">
+                        </div>
+                    <?php endif; ?>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <!-- Upload Form -->
+                        <form method="POST" action="" enctype="multipart/form-data" style="margin: 0;" id="profilePictureForm">
+                            <input type="hidden" name="action" value="upload_profile_picture">
+                            <label for="profile_picture" style="cursor: pointer; display: inline-block;">
+                                <img src="icons/upload.png" alt="Hochladen" width="40" height="40" style="transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" title="Profilbild hochladen">
+                            </label>
+                            <input type="file" id="profile_picture" name="profile_picture" accept="image/jpeg,image/png,image/gif,image/jpg" style="display: none;" onchange="this.form.submit();">
+                        </form>
+                        
+                        <!-- Remove Form -->
+                        <?php if (isset($userData['profile_picture']) && file_exists(__DIR__ . '/' . $userData['profile_picture'])): ?>
+                            <form method="POST" action="" style="margin: 0;" onsubmit="return confirm('Profilbild wirklich entfernen?');">
+                                <input type="hidden" name="action" value="remove_profile_picture">
+                                <button type="submit" style="background: none; border: none; cursor: pointer; padding: 0;">
+                                    <img src="icons/remove_image.png" alt="Entfernen" width="40" height="40" style="transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" title="Profilbild entfernen">
+                                </button>
+                            </form>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <small style="display: block; margin-top: 5px; color: #666; font-size: 1.4rem;">
+                    Klicke auf das Upload-Icon, um ein neues Profilbild hochzuladen (JPG, PNG, GIF, max. 5MB)
+                </small>
+            </div>
+            
+            <!-- Benutzerdaten -->
             <form method="POST" action="">
                 <input type="hidden" name="action" value="update_profile">
                 

@@ -42,6 +42,12 @@ session_start();
                 <strong>Karteikarten Icon:</strong> Erstellt von Tempo_doloe via <a href="https://www.flaticon.com" target="_blank" rel="noopener noreferrer">Flaticon</a>
             </li>
             <li>
+                <strong>Upload Icon:</strong> Erstellt von Graphics Plazza via <a href="https://www.flaticon.com" target="_blank" rel="noopener noreferrer">Flaticon</a> (Profilbild hochladen)
+            </li>
+            <li>
+                <strong>Remove Image Icon:</strong> Erstellt von Azland Studio via <a href="https://www.flaticon.com" target="_blank" rel="noopener noreferrer">Flaticon</a> (Profilbild entfernen)
+            </li>
+            <li>
                 <strong>Plus Icon:</strong> Von <a href="https://icons8.de/icons/set/plus--static--purple" target="_blank" rel="noopener noreferrer">Icons8.de</a> (Account hinzufügen Funktion)
             </li>
         </ul>
