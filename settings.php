@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $message = 'Passwörter stimmen nicht überein!';
                 $messageType = 'error';
             } else {
-                $users[$currentUser]['password'] = password_hash($newPassword, PASSWORD_DEFAULT);
+                $users[$currentUser]['password'] = password_hash($newPassword, PASSWORD_ARGON2ID);
                 file_put_contents($usersFile, json_encode($users, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 $message = 'Passwort erfolgreich geändert!';
                 $messageType = 'success';

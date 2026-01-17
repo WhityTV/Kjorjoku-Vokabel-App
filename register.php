@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $uid = uniqid("user_", true); // erzeugt eindeutige User-ID
         $users[$username] = [
             "uid" => $uid,
-            "password" => password_hash($password, PASSWORD_DEFAULT),
+            "password" => password_hash($password, PASSWORD_ARGON2ID),
             "email" => $email,
             "settings" => [
                 "daily_goal" => 20,
