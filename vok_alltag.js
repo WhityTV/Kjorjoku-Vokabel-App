@@ -78,11 +78,16 @@ document.addEventListener('DOMContentLoaded', function() {
   const gewusst_komplett = document.getElementById('gewusst_komplett');
   const gewusst_groesstenteils = document.getElementById('gewusst_groesstenteils');
   const gewusst_teilweise = document.getElementById('gewusst_teilweise');
+  const alles_vergessen = document.getElementById('alles_vergessen');
   const bereich_vergessen = document.getElementById('bereich_vergessen');
+  const gewusst_back = document.getElementById('gewusst_back');
+  const vergessen_back = document.getElementById('vergessen_back');
+  const next_btn = document.getElementById('next_btn');
+  const nextContainer = document.getElementById('nextContainer');
 
   if (gewusst_btn) {
     gewusst_btn.addEventListener('click', function() {
-      document.getElementById('gewusst_optns').style.display = 'block';
+      document.getElementById('gewusst_optns').style.display = 'flex';
       document.getElementById('reviewMenue').style.display = "none";
       document.getElementById('reviewMenue2').style.display = "none";
     });
@@ -90,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (gewusst_btn2) {
     gewusst_btn2.addEventListener('click', function() {
-      document.getElementById('gewusst_optns').style.display = 'block';
+      document.getElementById('gewusst_optns').style.display = 'flex';
       document.getElementById('reviewMenue').style.display = "none";
       document.getElementById('reviewMenue2').style.display = "none";
     });
@@ -99,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // --- "Vergessen" Buttons ---
   if (vergessen_btn) {
     vergessen_btn.addEventListener('click', function() {
-      document.getElementById('vergessen_optns').style.display = 'block';
+      document.getElementById('vergessen_optns').style.display = 'flex';
       document.getElementById('reviewMenue').style.display = "none";
       document.getElementById('reviewMenue2').style.display = "none";
     });
@@ -107,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (vergessen_btn2) {
     vergessen_btn2.addEventListener('click', function() {
-      document.getElementById('vergessen_optns').style.display = 'block';
+      document.getElementById('vergessen_optns').style.display = 'flex';
       document.getElementById('reviewMenue').style.display = "none";
       document.getElementById('reviewMenue2').style.display = "none";
     });
@@ -116,26 +121,101 @@ document.addEventListener('DOMContentLoaded', function() {
   // --- Unter-Optionen für "Gewusst" ---
   if (gewusst_komplett) {
     gewusst_komplett.addEventListener('click', function() {
-      // Logik für "Komplett gewusst" (z.B. nächste Karte laden)
-      nextCardAndReset();
-      document.getElementById('gewusst_optns').style.display = 'none';
+      handleGewusstClick();
     });
   }
 
   if (gewusst_groesstenteils) {
     gewusst_groesstenteils.addEventListener('click', function() {
-      // Logik für "Größtenteils gewusst" (z.B. Karte später wiederholen)
-      nextCardAndReset();
+      handleGewusstClick();
+    });
+  }
+
+  // Alles vergessen: direkt zur nächsten Karte springen
+  if (alles_vergessen) {
+    alles_vergessen.addEventListener('click', function() {
+      const card = container.querySelector('.flashcard.active');
+      if (!card) return;
+
+      const romajiVisible = card.querySelector('.romaji').style.display === "inline";
+
+      // Wenn bereits alles sichtbar, weiter zur nächsten Karte
+      if (romajiVisible) {
+        nextCardAndReset();
+        document.getElementById('vergessen_optns').style.display = 'none';
+        return;
+      }
+
+      // Sonst erst alle Lösungen anzeigen
+      card.querySelectorAll('.kanji, .kana, .romaji').forEach(el => {
+        el.style.display = 'inline';
+      });
+      card.querySelectorAll('.kanji_btn, .kana_btn, .romaji_btn').forEach(btn => {
+        btn.style.display = 'none';
+      });
+      document.getElementById('reviewMenue').style.display = "none";
+      document.getElementById('reviewMenue2').style.display = "none";
+      document.getElementById('vergessen_optns').style.display = 'none';
+      if (nextContainer) nextContainer.style.display = 'block';
+      saveProgress();
+    });
+  }
+
+  if (gewusst_back) {
+    gewusst_back.addEventListener('click', function() {
       document.getElementById('gewusst_optns').style.display = 'none';
+      document.getElementById('reviewMenue').style.display = 'block';
+      document.getElementById('reviewMenue2').style.display = 'none';
+      if (nextContainer) nextContainer.style.display = 'none';
+    });
+  }
+
+  if (vergessen_back) {
+    vergessen_back.addEventListener('click', function() {
+      document.getElementById('vergessen_optns').style.display = 'none';
+      document.getElementById('reviewMenue').style.display = 'block';
+      document.getElementById('reviewMenue2').style.display = 'none';
+      if (nextContainer) nextContainer.style.display = 'none';
+    });
+  }
+
+  if (next_btn) {
+    next_btn.addEventListener('click', function() {
+      nextCardAndReset();
     });
   }
 
   if (gewusst_teilweise) {
     gewusst_teilweise.addEventListener('click', function() {
-      // Logik für "Teilweise gewusst" (z.B. Karte bald wiederholen)
-      nextCardAndReset();
-      document.getElementById('gewusst_optns').style.display = 'none';
+      handleGewusstClick();
     });
+  }
+
+  function handleGewusstClick() {
+    const card = container.querySelector('.flashcard.active');
+    if (!card) return;
+
+    const romajiVisible = card.querySelector('.romaji').style.display === "inline";
+
+    document.getElementById('gewusst_optns').style.display = 'none';
+
+    // Wenn bereits alles sichtbar, weiter zur nächsten Karte
+    if (romajiVisible) {
+      nextCardAndReset();
+      return;
+    }
+
+    // Sonst erst alle Lösungen anzeigen
+    card.querySelectorAll('.kanji, .kana, .romaji').forEach(el => {
+      el.style.display = 'inline';
+    });
+    card.querySelectorAll('.kanji_btn, .kana_btn, .romaji_btn').forEach(btn => {
+      btn.style.display = 'none';
+    });
+    document.getElementById('reviewMenue').style.display = "none";
+    document.getElementById('reviewMenue2').style.display = "none";
+    if (nextContainer) nextContainer.style.display = 'block';
+    saveProgress();
   }
 
   // Funktion zum Wechseln zur nächsten Karte und Zurücksetzen
@@ -151,6 +231,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.getElementById('reviewMenue').style.display = "none";
     document.getElementById('reviewMenue2').style.display = "none";
+    document.getElementById('vergessen_optns').style.display = 'none';
+    document.getElementById('gewusst_optns').style.display = 'none';
+    if (nextContainer) nextContainer.style.display = 'none';
     saveProgress();
   }
 
@@ -236,6 +319,8 @@ document.addEventListener('DOMContentLoaded', function() {
     } else if (progress.kana) {
       document.getElementById('reviewMenue2').style.display = "block";
     }
+
+    if (nextContainer) nextContainer.style.display = 'none';
   }
 
   // Initialisierung

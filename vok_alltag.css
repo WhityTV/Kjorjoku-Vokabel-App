@@ -266,9 +266,23 @@ body{
 
 footer{
     font-size: 2rem;
-    position:absolute ;
+    position: absolute;
     bottom: 0;
     margin-bottom: 10px;
+    color: #666;
+    text-align: center;
+    width: 100%;
+}
+
+footer a {
+    color: #4a6fa5;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #3a5a8a;
 }
 
   p.text-home{
@@ -646,23 +660,27 @@ footer{
 #gewusst_optns, #vergessen_optns {
     cursor: pointer;
     display: none;
-    padding: 18px;
+    padding: 14px;
     border-radius: 8px;
-    margin: 20px auto;
+    margin: 12px auto;
     max-width: 40%;
     text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 
-#gewusst_komplett, #gewusst_groesstenteils, #gewusst_teilweise, #alles_vergessen, #bereich_vergessen {
+#gewusst_komplett, #gewusst_groesstenteils, #gewusst_teilweise, #alles_vergessen, #bereich_vergessen, #gewusst_back, #vergessen_back {
     font-size: 2.2rem;
     display: inline-block;
     margin: 5px;
     margin-top: 0%;
     cursor: pointer;
     background: dodgerblue;
-    min-width: 20%;
+    min-width: auto;
     max-block-size: 150px;
-    padding: 12px;
+    padding: 10px 14px;
     font-weight: bold;
     border-radius: 20px;
     border: none;
@@ -670,11 +688,18 @@ footer{
 }
 
 #reviewMenue, #reviewMenue2 {
+    display: none;
     text-align: center;
     margin: 20px 0;
 }
 
-#gewusst_btn, #vergessen_btn{
+#nextContainer {
+    display: none;
+    text-align: center;
+    margin: 20px 0;
+}
+
+#gewusst_btn, #gewusst_btn2, #vergessen_btn, #vergessen_btn2, #next_btn{
     font-size: 2.2rem;
     cursor: pointer;
     background: dodgerblue;
@@ -686,7 +711,17 @@ footer{
     color: white;
 } 
 
-#gewusst_btn:hover, #gewusst_komplett:hover, #gewusst_groesstenteils:hover, #gewusst_teilweise:hover, #alles_vergessen:hover, #bereich_vergessen:hover, #vergessen_btn:hover {
+#gewusst_back, #vergessen_back {
+    order: -1;
+    min-width: auto;
+    width: 60px;
+    padding: 10px 14px;
+    margin: 5px;
+    margin-top: 0%;
+    font-size: 1.8rem;
+}
+
+#gewusst_btn:hover, #gewusst_btn2:hover, #gewusst_komplett:hover, #gewusst_groesstenteils:hover, #gewusst_teilweise:hover, #alles_vergessen:hover, #bereich_vergessen:hover, #gewusst_back:hover, #vergessen_back:hover, #vergessen_btn:hover, #vergessen_btn2:hover, #next_btn:hover {
     background: dodgerblue;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -706,4 +741,65 @@ footer{
         padding: 8px 12px;
         font-size: 1.4rem;
     }
+}
+/* Info-Seiten Container (Credits, Impressum, Datenschutz) */
+.info-container {
+    max-width: 800px;
+    margin: 100px auto 50px;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.info-container h1 {
+    font-size: 3.5rem;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #4a6fa5;
+    padding-bottom: 10px;
+}
+
+.info-container h2 {
+    font-size: 2.4rem;
+    color: #4a6fa5;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.info-container h3 {
+    font-size: 2.0rem;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.info-container p, .info-container ul {
+    font-size: 1.8rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.info-container ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.info-container li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.info-container li:last-child {
+    border-bottom: none;
+}
+
+.info-container a {
+    color: #4a6fa5;
+    text-decoration: none;
+}
+
+.info-container a:hover {
+    text-decoration: underline;
 }

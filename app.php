@@ -6,6 +6,15 @@ if (!isset($_SESSION["loggedin"]) || !isset($_SESSION['user'])) {
     header("Location: login.php");
     exit;
 }
+
+// Benutzerdaten laden für Profilbild
+$usersFile = __DIR__ . '/users.json';
+$users = file_exists($usersFile) ? json_decode(file_get_contents($usersFile), true) : [];
+$currentUser = $_SESSION['user'];
+$userData = $users[$currentUser] ?? [];
+$profilePicture = isset($userData['profile_picture']) && file_exists(__DIR__ . '/' . $userData['profile_picture']) 
+    ? $userData['profile_picture'] 
+    : 'icons/favicon.png';
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +39,7 @@ if (!isset($_SESSION["loggedin"]) || !isset($_SESSION['user'])) {
         width="38" height="38">
     </a>
   </div>
-  <div class="kyoryoku-icon"><img src="icons/favicon.png" alt="Profilbild" width="46" height="46"></div>
+  <div class="kyoryoku-icon"><img src="<?php echo htmlspecialchars($profilePicture, ENT_QUOTES, 'UTF-8'); ?>" alt="Profilbild" width="46" height="46" style="border-radius: 50%; object-fit: cover;"></div>
   <div class="kyoryoku-menu" id="kyoryokuMenu">
     <ul>
       <li class="user_row">
@@ -90,15 +99,26 @@ if (!isset($_SESSION["loggedin"]) || !isset($_SESSION['user'])) {
       <button id="vergessen_btn">Vergessen</button>
   </div>
 
+  <div id="reviewMenue2">
+    <button id="gewusst_btn2">Gewusst</button>
+    <button id="vergessen_btn2">Vergessen</button>
+  </div>
+
   <div id="gewusst_optns" style="display: none;">
     <button id="gewusst_komplett">Komplett</button>
     <button id="gewusst_groesstenteils">Größtenteils</button>
     <button id="gewusst_teilweise">Teilweise</button>
+    <button id="gewusst_back">↩</button>
   </div>
 
   <div id="vergessen_optns" style="display: none;">
       <button id="alles_vergessen">Alles vergessen</button>
       <button id="bereich_vergessen">Bereich vergessen</button>
+      <button id="vergessen_back">↩</button>
+  </div>
+
+  <div id="nextContainer" style="display: none;">
+    <button id="next_btn">Next</button>
   </div>
 
 </body>
