@@ -251,7 +251,6 @@ html {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: wheat;
     color: #333;
 }
 
@@ -262,6 +261,32 @@ html {
 
 body{
     font-size: 3.5rem;
+    min-height: 100vh;
+    position: relative;
+    background: linear-gradient(to right, #f3e5c5 0%, #f3e5c5 55px, #f0e2c0 90px);
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 72px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+    pointer-events: none;
+    z-index: 10;
+}
+
+body.no-sidebar {
+    background: #f0e2c0;
+}
+
+body.no-sidebar::before {
+    display: none;
 }
 
 footer{
@@ -345,10 +370,10 @@ footer a:hover {
     display: flex;
     justify-content: left;
     align-items: left;
-    margin-top: 50px;
+    margin: 0;
     margin-left: 20%;
+    padding: 50px 15px 15px 15px;
     gap: 15px;
-    padding: 15px;
 
     font-size: 4rem;
     font-weight: bold;
@@ -365,24 +390,62 @@ footer a:hover {
     color: transparent;
 }
 
-.home-icon {
-    top: 30px;
+.kyoryoku-icon-sidebar {
     position: absolute;
-    left: 30px;
+    top: 15px;
+    left: 16px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.kyoryoku-icon-sidebar img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    position: absolute;
+    transition: opacity 0.3s ease;
+}
+
+.kyoryoku-icon-sidebar .kyoryoku-default {
+    opacity: 1;
+}
+
+.kyoryoku-icon-sidebar .kyoryoku-hover {
+    opacity: 0;
+}
+
+.kyoryoku-icon-sidebar:hover .kyoryoku-default {
+    opacity: 0;
+}
+
+.kyoryoku-icon-sidebar:hover .kyoryoku-hover {
+    opacity: 1;
+}
+
+
+.home-icon {
+    top: 75px;
+    position: absolute;
+    left: 16px;
     color: #4a6fa5;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
 }
 
 .home-icon.active {
   background-color: darkgray;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
 }
 
 .home-icon:hover {
@@ -394,16 +457,16 @@ footer a:hover {
 }
 
     .karteikarten-icon {
-        top: 100px; /* Abstand vom oberen Rand, anpassen */
+        top: 175px; /* Abstand vom oberen Rand, anpassen */
         position: absolute;
-        left: 30px; /* gleiche linke Position wie Home */
+        left: 16px; /* gleiche linke Position wie Home */
         cursor: pointer;
         transition: transform 0.2s, box-shadow 0.2s;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 50px;
-        height: 50px;
+        width: 44px;
+        height: 44px;
         border-radius: 50%; /* rund wie Home */
     }
 
@@ -442,7 +505,7 @@ footer a:hover {
 .kyoryoku-icon:hover {
     border: none;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
     align-items: center;
     justify-content: center;
 }
@@ -802,4 +865,405 @@ footer a:hover {
 
 .info-container a:hover {
     text-decoration: underline;
+}
+/* ===== IMPORT MODAL STYLES ===== */
+
+.import-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 16px;
+  top: 235px;
+  width: 44px;
+  height: 44px;
+  box-shadow: none;
+}
+
+.import-icon-btn:hover {
+  background: none;
+  transform: translateY(-2px);
+  border-radius: 50%;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
+}
+
+.import-icon-btn img {
+  display: block;
+  width: 36px;
+  height: 36px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 30px;
+  background: transparent;
+}
+
+/* Import Modal */
+.import-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.import-modal-content {
+  background: white;
+  border-radius: 15px;
+  padding: 40px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.import-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 3rem;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s ease;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.import-close-btn:hover {
+  color: #333;
+}
+
+.import-modal-content h2 {
+  font-size: 2.4rem;
+  margin-bottom: 25px;
+  color: #2c3e50;
+  text-align: center;
+}
+
+/* Format Selector */
+.import-format-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.import-format-selector label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.4rem;
+}
+
+.import-format-selector input[type="radio"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+.import-format-selector label:hover {
+  border-color: #667eea;
+  background-color: #f5f7ff;
+}
+
+.import-format-selector input[type="radio"]:checked + span {
+  font-weight: 600;
+  color: #667eea;
+}
+
+/* File Input */
+.import-file-input {
+  margin-bottom: 25px;
+}
+
+.import-file-input input[type="file"] {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 8px;
+  border: 2px dashed #667eea;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+
+.import-file-input input[type="file"]::file-selector-button {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.3rem;
+  margin-right: 10px;
+}
+
+.import-file-input input[type="file"]::file-selector-button:hover {
+  background: #764ba2;
+}
+
+.import-file-input small {
+  display: block;
+  color: #999;
+  font-size: 1.3rem;
+}
+
+/* Preview */
+.import-preview {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 25px;
+}
+
+.import-preview h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.6rem;
+  color: #2c3e50;
+}
+
+.preview-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.preview-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.preview-card:last-child {
+  margin-bottom: 0;
+}
+
+.preview-german {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1.4rem;
+  min-width: 120px;
+}
+
+.preview-japanese {
+  display: flex;
+  gap: 12px;
+  font-size: 1.3rem;
+  color: #666;
+}
+
+.preview-kanji {
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.preview-kana {
+  color: #999;
+  font-size: 1.2rem;
+}
+
+.preview-romaji {
+  color: #999;
+  font-size: 1.2rem;
+}
+
+.preview-more {
+  text-align: center;
+  color: #999;
+  padding: 10px;
+  font-style: italic;
+  font-size: 1.3rem;
+}
+
+/* Options */
+.import-options {
+  margin-bottom: 25px;
+}
+
+.import-options label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+
+.import-options input[type="checkbox"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+/* Buttons */
+.import-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.btn-secondary,
+.btn-primary {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #d0d0d0;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #667eea;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #764ba2;
+  transform: translateY(-2px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Status */
+.import-status {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  text-align: center;
+  border-left: 4px solid;
+}
+
+.import-status.error {
+  background: #ffebee;
+  color: #c62828;
+  border-left-color: #c62828;
+}
+
+.import-status.success {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-left-color: #2e7d32;
+}
+
+.import-status.loading {
+  background: #e3f2fd;
+  color: #1976d2;
+  border-left-color: #1976d2;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .import-modal-content {
+    padding: 25px;
+    width: 95%;
+  }
+
+  .import-format-selector {
+    grid-template-columns: 1fr;
+  }
+
+  .import-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .preview-japanese {
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+
+/* Tooltip-Styling für abgerundete Ecken */
+.kyoryoku-icon-sidebar[data-title]:hover::after,
+.home-icon a[data-title]:hover::after,
+.karteikarten-icon a[data-title]:hover::after,
+.import-icon-btn[data-title]:hover::after {
+  content: attr(data-title);
+  position: absolute;
+  left: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 1.4rem;
+  white-space: nowrap;
+  z-index: 10000;
+  pointer-events: none;
 }

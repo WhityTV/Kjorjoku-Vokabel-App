@@ -50,6 +50,12 @@ session_start();
             <li>
                 <strong>Plus Icon:</strong> Von <a href="https://icons8.de/icons/set/plus--static--purple" target="_blank" rel="noopener noreferrer">Icons8.de</a> (Account hinzufügen Funktion)
             </li>
+            <li>
+                <strong>Seitenleiste Icon:</strong> Erstellt von NX Icon via <a href="https://www.flaticon.com" target="_blank" rel="noopener noreferrer">Flaticon</a> (Navigation)
+            </li>
+            <li>
+                <strong>Import/Export Icon:</strong> Erstellt von kerismaker via <a href="https://www.flaticon.com" target="_blank" rel="noopener noreferrer">Flaticon</a> (Datentransfer)
+            </li>
         </ul>
 
         <h2>🤖 KI-generierte Inhalte</h2>

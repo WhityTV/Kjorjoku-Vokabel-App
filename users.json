@@ -14,5 +14,16 @@
         "uid": "user_6964c419b12659.34805674",
         "password": "$2y$10$NEq2HFnsH65QkmYiP4A2JO1iMqXTPi7cavbD0c3KFlwwvZSsy0huG",
         "email": "kindsvatermax344@gmail.com"
+    },
+    "MKTest": {
+        "uid": "user_696b9b0b8a70e5.14375194",
+        "password": "$argon2id$v=19$m=65536,t=4,p=1$WHNZTmd4RzdsOFlOdlp5eA$EYgMqM6VCK6Q7yHSHJQbDrDBzS17eDc1oOH4tLLlfmI",
+        "email": "kindsvatermax@outlook.com",
+        "settings": {
+            "daily_goal": 20,
+            "learning_mode": "normal",
+            "notifications": 1,
+            "dark_mode": 0
+        }
     }
 }
